@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
-login-btn {
-    background-color: blue;
+.box_body {
+    border-top: 30px;
+    text-align: center;
 }
+
+img {
+    border-radius: 50%;
+}
+
+span {}
