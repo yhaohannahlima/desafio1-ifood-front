@@ -1,6 +1,9 @@
+let login = document.getElementById('login');
+
 function logar() {
     const password = document.getElementById("password").value;
     const email = document.getElementById("email").value;
+    email.contains("@")
     switch (password || email) {
         case "":
             return window.alert("Preencha todos os campos por gentieza.");
@@ -13,6 +16,7 @@ function logar() {
                 window.alert("Login realizado com sucesso");
                 window.location = "/teste_acesso.html";
             } catch (error) {
+
                 error.message;
             }
     }
