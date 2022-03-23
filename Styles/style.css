@@ -25,7 +25,8 @@ body {
 }
 
 input {
-    border-radius: 15px;
+    border-radius: 8px;
+    padding: 5px;
 }
 
 label,
