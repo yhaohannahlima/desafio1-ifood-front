@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: contain;
+    height: 100vh;
+}
+
+.tela-smartphone {
+    display: flex;
+    flex-direction: column;
+
+    width: 18rem;
+    height: 30rem;
+
+    padding: 0.5rem;
+    
+    border: solid 0.05rem rgba(0, 0, 0, 1);
+}
+
+.pagina-pedidos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: max-content;
+    height: 3.5rem;
+    
+    margin-bottom: 1rem;
+
+    border-radius: .5rem;
+    background-color: #6C767D;
+
+    color: #FFFFFF;
+    font-size: 1.4rem;
+}
+
+.listaPedidos {
+    display: flex;
+    flex-direction: column;
+    
+    gap: 0.5rem;
+
+    height: 85%;
+
+    overflow-y: scroll;
+}
+
+.listaPedidos::-webkit-scrollbar {
+    width: 0rem;
+}
+
+.btn.btn-pedido {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    min-height: 3rem;
+
+    border: solid 0.05rem rgba(0, 0, 0, 0.2);
+} 
+
+.btn.btn-pedido:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+
+    font-weight: 700;
+}
