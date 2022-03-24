@@ -4,6 +4,22 @@
     box-sizing: border-box;
 }
 
+.alert.alert-danger {
+    padding: 0.8rem;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    text-align: center;
+    font-size: 0.7rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.hidden {
+    display: none;
+}
+
 body {
     /* background-image: radial-gradient(rgba(0, 0, 0, 0.5)0, rgba(254, 255, 255, 0.5)); */
     width: 100%;
