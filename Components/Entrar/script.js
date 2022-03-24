@@ -15,8 +15,6 @@ function logar() {
             break;
         default:
             try {
-                // window.alert("Login realizado com sucesso");
-                // window.location.href = "../ListaPedidos/index.html";
 
                 const corpo = {
                     email: email,
@@ -24,7 +22,7 @@ function logar() {
                 }
 
                 const cabecalho = {
-                    // method: "POST",
+                    method: "POST",
                     body: JSON.stringify(corpo),
                     headers: {
                         "content-type": "application/json"
@@ -35,7 +33,7 @@ function logar() {
                     .then(res => res.json())
                     .then(token => {
                         window.alert("Login realizado com sucesso");
-                        // localStorage.setItem("login", token.token)
+                        localStorage.setItem("login")
                         window.location = "../ListaPedidos/index.html";
                     })
                     .catch(err => alert("Impossivel autenticar!"));
