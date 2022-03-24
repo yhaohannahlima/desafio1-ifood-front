@@ -18,7 +18,7 @@ const pedidos = [
     { id: 12, situacao: "em aberto", cliente: "Dado Diamantrio" }
 ];
 
-inserirPedidos(pedidos); // retirar
+inserirPedidos(pedidos); // deve ser retirado quando a API estiver fucnionando
 acessarListaDePedidosDoBancoDeDados(linkApi);
 
 //----------- FUNÇÕES
