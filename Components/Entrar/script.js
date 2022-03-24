@@ -15,34 +15,31 @@ function logar() {
             break;
         default:
             try {
-                // if (email === "entregador@entrega.com" && senha === "1234") {
-                window.alert("Login realizado com sucesso");
-                window.location.href = "../ListaPedidos/index.html";
+                // window.alert("Login realizado com sucesso");
+                // window.location.href = "../ListaPedidos/index.html";
 
-                // const corpo = {
-                //     email: email,
-                //     senha: senha
-                // }
+                const corpo = {
+                    email: email,
+                    senha: senha
+                }
 
-                // const cabecalho = {
-                //     // method: "POST",
-                //     body: JSON.stringify(corpo),
-                //     headers: {
-                //         "content-type": "application/json"
-                //     }
-                // }
+                const cabecalho = {
+                    // method: "POST",
+                    body: JSON.stringify(corpo),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                }
 
-                // fetch("http://localhost:8080/login")
-                //     .then(res => res.json())
-                //     .then(token => {
-                //             window.alert("Login realizado com sucesso");
-                // localStorage.setItem("login", token.token)
-                //     window.location = "../ListaPedidos/index.html";
-                // })
-                // .catch(err => alert("Impossivel autenticar!"));
-                // } else {
-                //     return window.alert("Dados incorretos.")
-                // }
+                fetch("http://localhost:8080/login", cabecalho)
+                    .then(res => res.json())
+                    .then(token => {
+                        window.alert("Login realizado com sucesso");
+                        // localStorage.setItem("login", token.token)
+                        window.location = "../ListaPedidos/index.html";
+                    })
+                    .catch(err => alert("Impossivel autenticar!"));
+                return window.alert("Dados incorretos.")
             } catch (error) {
                 hidden();
             }
