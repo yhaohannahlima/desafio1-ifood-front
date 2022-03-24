@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: contain;
+    height: 100vh;
+}
+
+.tela-telefone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 18rem;
+    height: 30rem;
+
+    padding: 0.5rem;
+    
+    border: solid 0.05rem rgba(0, 0, 0, 1);
+}
+
+.pagina-pedidos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 3.5rem;
+    
+    margin-bottom: .5rem;
+
+    border-radius: .5rem;
+    background-color: #6C767D;
+
+    color: #FFFFFF;
+    font-size: 1.4rem;
+}
+
+.cliente {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 3rem;
+
+    margin-bottom: 3rem;
+
+    padding: 1rem;
+
+    border-radius: .5rem;
+    background-color: #E2E3E5;
+}
+
+.fundo-imagem {
+    padding: 0.8rem 1.2rem 1.2rem 0.8rem;
+    background-color: #f21111;
+
+    margin-bottom: 3rem;
+
+    border-radius: 6rem;
+}
+
+.imagem-moto {
+    width: 8rem;
+    height: 8rem;
+}
+
+.btn-concluir-cancela {
+    display: flex;
+
+    gap: 2rem;
+}
+
+.btn.btn-concluir.btn-lg, .btn.btn-cancelar.btn-lg {
+    width: 7rem;
+    height: 3rem;
+
+    border: none;
+
+    color: #FFFFFF;
+    font-size: 1rem;
+}
+
+.btn.btn-concluir.btn-lg {
+   background-color: #33A64C;
+}
+
+.btn.btn-cancelar.btn-lg {
+    background-color: #DB2843;
+}
+
+.btn.btn-primary.btn-lg:active, .btn.btn-secondary.btn-lg:active {
+    box-shadow: none;
+}
