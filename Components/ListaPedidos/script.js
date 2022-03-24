@@ -1,5 +1,5 @@
 const listaPedidos = document.querySelector('div .lista-pedidos');
-const linkApi = ''; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
+const linkApi = 'http://localhost:8080/pedidos/abertos/'; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
 
 
 //lista fake
@@ -18,7 +18,7 @@ const pedidos = [
     { id: 12, situacao: "em aberto", cliente: "Dado Diamantrio" }
 ];
 
-inserirPedidos(pedidos); // deve ser retirado quando a API estiver fucnionando
+// inserirPedidos(pedidos); // deve ser retirado quando a API estiver fucnionando
 acessarListaDePedidosDoBancoDeDados(linkApi);
 
 //----------- FUNÇÕES
