@@ -15,11 +15,12 @@ function logar() {
             break;
         default:
             try {
-
+                console.log("antes do corpo")
                 const corpo = {
                     email: email,
                     senha: senha
                 }
+                console.log("tras o corpo " + corpo)
 
                 const cabecalho = {
                     method: "POST",
