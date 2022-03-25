@@ -1,23 +1,29 @@
 const listaPedidos = document.querySelector('div .lista-pedidos');
-const linkApi = '';
+const linkApi = 'http://localhost:8080/pedidos/abertos/'; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
 
 
-//popular
+//lista fake
 const pedidos = [
-    { id: 1, situacao: true }, { id: 2, situacao: false }, { id: 3, situacao: true },
-    { id: 4, situacao: true }, { id: 5, situacao: true }, { id: 6, situacao: true },
-    { id: 7, situacao: false }, { id: 8, situacao: false }, { id: 9, situacao: true },
-    { id: 10, situacao: false }, { id: 11, situacao: false }, { id: 12, situacao: true }
+    { id: 1, situacao: "em aberto", cliente: "Josefin Faria" },
+    { id: 2, situacao: "finalizado", cliente: "Alberto Damagio" },
+    { id: 3, situacao: "em aberto", cliente: "Kenedy Triton" },
+    { id: 4, situacao: "em aberto", cliente: "Leandro Donato" },
+    { id: 5, situacao: "em aberto", cliente: "Merida Spoletto" },
+    { id: 6, situacao: "em aberto", cliente: "Nina Albuquerque" },
+    { id: 7, situacao: "finalizado", cliente: "Pietro Ferguncio" },
+    { id: 8, situacao: "finalizado", cliente: "Cora Coralina" },
+    { id: 9, situacao: "em aberto", cliente: "Fernando Pessoa" },
+    { id: 10, situacao: "finalizado", cliente: "Rubem Alves" },
+    { id: 11, situacao: "finalizado", cliente: "Jose Saraiva" },
+    { id: 12, situacao: "em aberto", cliente: "Dado Diamantrio" }
 ];
 
-inserirPedidos(pedidos); 
-acessarListaDePedidosApi(linkApi)
-
-
+// inserirPedidos(pedidos); // deve ser retirado quando a API estiver fucnionando
+acessarListaDePedidosDoBancoDeDados(linkApi);
 
 //----------- FUNÇÕES
 function inserirPedidos(pedidos) {
-    if(pedidos.length === 0) {
+    if (pedidos.length === 0) {
         return;
     }
 
@@ -29,17 +35,18 @@ function inserirPedidos(pedidos) {
         listaPedidos.append(novoPedido);
 
         const pedido = document.querySelectorAll('.btn-pedido');
-        pedido[indice].textContent = `Código do pedido: ${item.id}`;
+        pedido[indice].textContent = `Código do pedido: ${item.id}`; // mudar para codigoPedido
 
         pedido[indice].addEventListener('click', () => {
-            window.location.href = '../IniciarPedido/index.html';
-        }); 
+            window.location.href = '../ConfirmarCancelar/index.html'; // mudar para IniciarPedido
+            localStorage.setItem('Dados do pedido', JSON.stringify(pedidos[indice]));
+        });
     });
 }
 
-function acessarListaDePedidosApi(linkApi) {
-    fetch(linkApi).then(function(response) {
-        if(!response.ok) {
+function acessarListaDePedidosDoBancoDeDados(linkApi) {
+    fetch(linkApi).then(function (response) {
+        if (!response.ok) {
             alerta = document.querySelector('.alert');
             alerta.classList.remove('hidden');
 
@@ -58,14 +65,16 @@ function acessarListaDePedidosApi(linkApi) {
             const listaPedidosAberto = [];
 
             body.results.forEach(item => {
-                if (!item.situacao) {
+                if (item.situacao != "em aberto") {
                     return;
                 }
 
                 listaPedidosAberto.push(item);
             });
 
-            inserirPedidos(listaPedidosAberto); 
+            inserirPedidos(listaPedidosAberto);
+
+            // localStorage.setItem('Lista de Pedidos', listaPedidosAberto);
         })
     });
 }
