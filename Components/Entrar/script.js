@@ -40,6 +40,7 @@ async function logar() {
             }
     }
 };​
+
 const hidden = (mensagem) => {
         const alerta = document.querySelector('.alert');
         alerta.classList.remove('hidden');​
