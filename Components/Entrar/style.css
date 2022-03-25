@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.alert.alert-danger {
+.alert {
     padding: 0.8rem;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -22,25 +22,19 @@
 
 body {
     /* background-image: radial-gradient(rgba(0, 0, 0, 0.5)0, rgba(254, 255, 255, 0.5)); */
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: contain;
     height: 100vh;
-    position: absolute;
 }
 
-.box_body {
-    margin: auto;
-}
-
-.card {
-    position: fixed;
-    right: 45%;
-    top: 20%;
-    margin: 0;
+.card_box {
     border-radius: 15px;
     /* background-image: radial-gradient(rgba(0, 0, 0, 0.5)0, rgba(254, 255, 255, 0.5)); */
-    min-width: 250px;
-    min-height: 400px;
-    margin: 0px;
+    width: 270px;
+    height: 400px;
     padding: 10px;
     border: solid 1px;
     display: flex;
@@ -50,13 +44,6 @@ body {
 input {
     border-radius: 8px;
     padding: 5px;
-}
-
-label,
-input,
-p {
-    max-width: 200px;
-    max-height: 200px;
 }
 
 
