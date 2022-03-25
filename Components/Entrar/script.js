@@ -1,61 +1,61 @@
-let login = document.getElementById('login');
-
-function logar() {
-    const senha = document.getElementById("password").value;
-    const email = document.getElementById("email").value;
-    switch (senha && email) {
+const login = document.getElementById('login');
+const urlLogin = "http://localhost:8080/login";​
+async function logar() {
+    const senha = document.getElementById("senha").value;
+    const email = document.getElementById("email").value;​
+    switch (senha || email) {
         case "":
-            hidden();
+            hidden("Usuário e/ou senha incorretos!");
             break;
         case " ":
-            hidden();
+            hidden("Usuário e/ou senha incorretos!");
             break;
         case null:
-            hidden();
+            hidden("Usuário e/ou senha incorretos!");
+            break;
+        case undefined:
+            hidden("Usuário e/ou senha incorretos!");
             break;
         default:
             try {
-                // if (email === "entregador@entrega.com" && senha === "1234") {
-                window.alert("Login realizado com sucesso");
-                window.location.href = "../ListaPedidos/index.html";
-
-                // const corpo = {
-                //     email: email,
-                //     senha: senha
-                // }
-
-                // const cabecalho = {
-                //     // method: "POST",
-                //     body: JSON.stringify(corpo),
-                //     headers: {
-                //         "content-type": "application/json"
-                //     }
-                // }
-
-                // fetch("http://localhost:8080/login")
-                //     .then(res => res.json())
-                //     .then(token => {
-                //             window.alert("Login realizado com sucesso");
-                // localStorage.setItem("login", token.token)
-                //     window.location = "../ListaPedidos/index.html";
-                // })
-                // .catch(err => alert("Impossivel autenticar!"));
-                // } else {
-                //     return window.alert("Dados incorretos.")
-                // }
+                await fetch(urlLogin, {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        senha: senha
+                    })
+                }).then((response) => {
+                    if (response.status === 200) {
+                        window.location.href = '../ListaPedidos/index.html';
+                    } else {
+                        hidden("Usuário e/ou senha incorretos!");
+                    }
+                })
             } catch (error) {
-                hidden();
+                hidden("Erro ao conectar!");
             }
     }
-}
-
-const hidden = () => {
-    alerta = document.querySelector('.alert');
-    alerta.classList.remove('hidden');
-
-    alerta.textContent = "Dados incorretos";
-
-    alerta.addEventListener('click', () => {
-        alerta.classList.add('hidden');
-    });
-}
+};​
+const hidden = (mensagem) => {
+        const alerta = document.querySelector('.alert');
+        alerta.classList.remove('hidden');​
+        alerta.textContent = mensagem;​
+        alerta.addEventListener('click', () => {
+            alerta.classList.add('hidden');
+        });
+    }
+    // fetch("http://localhost:8080/login")
+    //     .then(res => res.json())
+    //     .then(token => {
+    //             window.alert("Login realizado com sucesso");
+    // localStorage.setItem("login", token.token)
+    //     window.location = "../ListaPedidos/index.html";
+    // })
+    // .catch(err => alert("Impossivel autenticar!"));
+    // } else {
+    //     return window.alert("Dados incorretos.")
+    // }
