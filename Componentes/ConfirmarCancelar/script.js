@@ -1,3 +1,5 @@
+import { alerta } from "../util.js";
+
 const pedido = document.querySelector('div .pagina-pedidos');
 const nomeCliente = document.querySelector('div .cliente');
 
@@ -13,26 +15,30 @@ const listaDePontosFake = [
     { latitude: -27.59196379398398, longitude: -48.56136653609618, tempo: new Date() },
     { latitude: -27.5915756568625, longitude: -48.560085548477566, tempo: new Date() },
     { latitude: -27.591265146175957, longitude: -48.56134463887192, tempo: new Date() },
-    { latitude: -27.593244636735445, longitude: -48.56258183204204, tempo: new Date() },
-    { latitude: -27.59356484508511, longitude: -48.564169380800145, tempo: new Date() },
-    { latitude: -27.594127633251347, longitude: -48.56708171162537, tempo: new Date() },
-    { latitude: -27.59463219949575, longitude: -48.569359022947346, tempo: new Date() },
-    { latitude: -27.59292442745049, longitude: -48.57116554394794, tempo: new Date() },
-    { latitude: -27.59410822681095, longitude: -48.569906453553585, tempo: new Date() },
-    { latitude: -27.59614588429443, longitude: -48.56918384515334, tempo: new Date() },
+    // { latitude: -27.593244636735445, longitude: -48.56258183204204, tempo: new Date() },
+    // { latitude: -27.59356484508511, longitude: -48.564169380800145, tempo: new Date() },
+    // { latitude: -27.594127633251347, longitude: -48.56708171162537, tempo: new Date() },
+    // { latitude: -27.59463219949575, longitude: -48.569359022947346, tempo: new Date() },
+    // { latitude: -27.59292442745049, longitude: -48.57116554394794, tempo: new Date() },
+    // { latitude: -27.59410822681095, longitude: -48.569906453553585, tempo: new Date() },
+    // { latitude: -27.59614588429443, longitude: -48.56918384515334, tempo: new Date() },
     { latitude: -27.594835965974582, longitude: -48.56801234365599, tempo: new Date() }
 ];
 
 //ponto final fake
+const pontoAtual = [];
 const pontoFinalFake = listaDePontosFake[listaDePontosFake.length - 1];
 
 const intervalo = 3000;
 let i = 0; // retirar após a integração com a API
 
 const intervalID = window.setInterval(() => {
-    const pontoFake = listaDePontosFake[i]; // retirar após a integração com a API
+    pontoAtual.pop();
+    pontoAtual.push(listaDePontosFake[i]); // retirar após a integração com a API
 
-    marcarPontoDeGeolocalizacaoDaListaFake(pontoFake); // retirar após a integração com a API
+    marcarPontoDeGeolocalizacaoDaListaFake(pontoAtual); // retirar após a integração com a API
+
+    i++;
 
     // // retirar após a integração com a Api
     // if (i < 12) {
@@ -40,7 +46,6 @@ const intervalID = window.setInterval(() => {
     // } else {
     //     i = 0;
     // }
-    i++;
 }, intervalo);
 
 
@@ -50,14 +55,14 @@ cancelarPedido();
 
 //---------- FUNÇÕES
 function preencherInformacoesPedido() {
-    pedido.textContent = `Pedido #${pedidoObj.codigoPedido}`; 
+    pedido.textContent = `Pedido #${pedidoObj.codigoPedido}`;
     nomeCliente.textContent = `Cliente: ${pedidoObj.cliente}`;
 }
 
 function marcarPontoDeGeolocalizacaoDaListaFake(ponto) {
-    ponto.tempo = Date.now(); // retirar após a integração com a API
+    ponto[0].tempo = Date.now(); // retirar após a integração com a API
 
-    if (ponto.latitude === pontoFinalFake.latitude && ponto.longitude === pontoFinalFake.longitude) {
+    if (ponto[0].latitude === pontoFinalFake.latitude && ponto[0].longitude === pontoFinalFake.longitude) {
         enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto);
         clearInterval(intervalID);
         return;
@@ -65,10 +70,10 @@ function marcarPontoDeGeolocalizacaoDaListaFake(ponto) {
     enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto);
 }
 
-async function enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoFake) {
-    const latitude = pontoFake.latitude; //colocar o ponto real
-    const longitude = pontoFake.longitude; //colocar o ponto real
-    const tempo = pontoFake.tempo; //colocar o ponto real
+async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
+    const latitude = ponto[0].latitude; //colocar o ponto real
+    const longitude = ponto[0].longitude; //colocar o ponto real
+    const tempo = ponto[0].tempo; //colocar o ponto real
 
     if (!pedidoObj.codigoPedido || !latitude || !longitude || !tempo) {
         return;
@@ -94,39 +99,45 @@ async function enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoFake) {
             if (response.status === 200) { // modificar para guardar os dados que não foram enviados
                 return;
             } else {
-                alerta(".alert-warning", "Sua localização não está sendo enviada!!!");
+                alerta(".alert-warning", "Sua localização não está sendo enviada!!!"); // colocar mensagem da API
                 return;
             }
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.message);
+        return alerta(".alert-danger", error.message); // colocar mensagem da API
     }
 }
 
 async function enviarUltimoDadoAoConcluir() {
     try {
         const idPedido = pedidoObj.codigoPedido;
+        const idEntregador = {
+            idEntregador: pedidoObj.codigoEntregador
+        };
+
+        console.log(idPedido);
+        console.log(idEntregador);
 
         await fetch(`${urlBase}/pedidos/finalizar/${idPedido}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(idPedido)
+            body: JSON.stringify(idEntregador)
 
         }).then((response) => {
-            console.log(response) //------------------------------------PAREI AQUI
-            if (response.status === "201") {
+            console.log(response)
+            if (response.status === "200") {
                 window.location.href = "../ListaPedidos/index.html";
                 localStorage.clear();
             } else {
-                return alerta(".alert-warning", "Não foi possível finalizar o pedido!!!");
+                return alerta(".alert-warning", "Não foi possível finalizar o pedido!!!"); // colocar mensagem da API
             }
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.message);
+        return alerta(".alert-danger", error.message); // colocar mensagem da API
     }
 }
 
@@ -135,7 +146,7 @@ function concluirPedido() {
     const botaoConcluirPedido = document.querySelector('.btn-concluir');
 
     botaoConcluirPedido.addEventListener('click', () => {
-        enviarPontoDeGeolocalizacaoParaApiContinuamente();
+        enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
         clearInterval(intervalID);
 
         enviarUltimoDadoAoConcluir();
@@ -156,19 +167,3 @@ function cancelarPedido() {
 }
 
 
-//-------------------------------------------------------
-function alerta(tipoAlerta, mensagem) {
-    const alerta = document.querySelector(tipoAlerta);
-    
-    alerta.classList.remove('hidden');
-
-    alerta.textContent = mensagem;
-
-    alerta.addEventListener('click', () => {
-        alerta.classList.add('hidden');
-    });
-
-    setTimeout(() => { 
-        alerta.classList.add('hidden');
-    }, intervalo - 2000);
-}
