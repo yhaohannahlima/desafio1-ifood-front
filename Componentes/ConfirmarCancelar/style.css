@@ -25,6 +25,8 @@ body {
     padding: 0.5rem;
     
     border: solid 0.05rem rgba(0, 0, 0, 1);
+
+    position: relative;
 }
 
 .pagina-pedidos {
@@ -99,4 +101,26 @@ body {
 
 .btn.btn-primary.btn-lg:active, .btn.btn-secondary.btn-lg:active {
     box-shadow: none;
+}
+
+.alert.alert-warning, .alert.alert-danger {
+    width: 100%;
+    height: 3rem;
+
+    padding: 1rem 1rem 1rem 1rem;
+
+    border-radius: 0;
+
+    text-align: center;
+    font-size: 0.7rem;
+
+    position: absolute;
+    top: 90%;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.hidden {
+    display: none;
 }
