@@ -56,7 +56,7 @@ cancelarPedido();
 //---------- FUNÇÕES
 function preencherInformacoesPedido() {
     pedido.textContent = `Pedido #${pedidoObj.codigoPedido}`;
-    nomeCliente.textContent = `Cliente: ${pedidoObj.cliente}`;
+    nomeCliente.textContent = `Cliente: ${pedidoObj.cliente.nome}`;
 }
 
 function marcarPontoDeGeolocalizacaoDaListaFake(ponto) {
