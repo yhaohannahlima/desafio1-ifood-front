@@ -24,7 +24,7 @@ body {
 
     padding: 0.5rem;
     
-    border: solid 0.05rem rgba(0, 0, 0, 1);
+    border: solid 0.5px rgba(0, 0, 0, 1);
 
     position: relative;
 }
@@ -39,7 +39,7 @@ body {
     
     margin-bottom: 0.5rem;
 
-    border-radius: .5rem;
+    border-radius: 5px;
     background-color: #6C767D;
 
     color: #FFFFFF;
@@ -73,7 +73,7 @@ body {
     width: 100%;
     min-height: 3rem;
 
-    border: solid 0.05rem rgba(0, 0, 0, 0.2);
+    border: solid 0.5px rgba(0, 0, 0, 0.2);
     box-shadow: none;
 } 
 

@@ -4,57 +4,76 @@
     box-sizing: border-box;
 }
 
-.alert {
-    padding: 0.8rem;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    text-align: center;
-    font-size: 0.7rem;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-}
-
-.hidden {
-    display: none;
-}
-
 body {
-    /* background-image: radial-gradient(rgba(0, 0, 0, 0.5)0, rgba(254, 255, 255, 0.5)); */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     width: contain;
     height: 100vh;
 }
 
-.card_box {
-    border-radius: 15px;
-    /* background-image: radial-gradient(rgba(0, 0, 0, 0.5)0, rgba(254, 255, 255, 0.5)); */
-    width: 270px;
-    height: 400px;
-    padding: 10px;
-    border: solid 1px;
-    display: flex;
-    align-items: center;
-}
-
 input {
-    border-radius: 8px;
-    padding: 5px;
+    all: unset;
+
+    width: 94%;
+
+    margin-bottom: 3rem;
+    padding: 0.5rem;
+    
+    border-radius: 4px;
+    border: solid 1px rgba(0, 0, 0, 1);
 }
-
-
-/* 
-img {
-    max-width: 200px;
-} */
 
 button {
-    margin-bottom: 30px;
     border-radius: 15px;
-    max-height: 45px;
-    width: 150px;
+    max-height: 4.5rem;
+    width: 10rem;
+
+    text-align: center;
+}
+
+.tela-telefone {
+    display: flex;
+    flex-direction: column;
+
+    width: 18rem;
+    height: 30rem;
+
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    
+    border: solid 0.5px rgba(0, 0, 0, 1);
+
+    position: relative;
+}
+
+.label_input {
+    all: unset;
+}
+
+.label_input.email {
+    margin-top: 4rem;
+}
+
+.alert.alert-danger {
+    width: 100%;
+    height: 3rem;
+
+    padding: 1rem 1rem 1rem 1rem;
+
+    border-radius: 0;
+
+    text-align: center;
+    font-size: 0.7rem;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.hidden {
+    display: none;
 }
