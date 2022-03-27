@@ -42,13 +42,13 @@ async function logar() {
 };
 
 const hidden = (mensagem) => {
-        const alerta = document.querySelector('.alert');
-        alerta.classList.remove('hidden');
-        alerta.textContent = mensagem;
-        alerta.addEventListener('click', () => {
-            alerta.classList.add('hidden');
-        });
-    }
+    const alerta = document.querySelector('.alert');
+    alerta.classList.remove('hidden');
+    alerta.textContent = mensagem;
+    alerta.addEventListener('click', () => {
+        alerta.classList.add('hidden');
+    });
+}
     // fetch("http://localhost:8080/login")
     //     .then(res => res.json())
     //     .then(token => {
