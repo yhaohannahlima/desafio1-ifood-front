@@ -1,24 +1,24 @@
 const listaPedidos = document.querySelector('div .lista-pedidos');
-const linkApi = 'http://localhost:8080/pedidos/abertos/'; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
+const linkApi = ''; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
 
 
 //lista fake
 const pedidos = [
-    { id: 1, situacao: "em aberto", cliente: "Josefin Faria" },
-    { id: 2, situacao: "finalizado", cliente: "Alberto Damagio" },
-    { id: 3, situacao: "em aberto", cliente: "Kenedy Triton" },
-    { id: 4, situacao: "em aberto", cliente: "Leandro Donato" },
-    { id: 5, situacao: "em aberto", cliente: "Merida Spoletto" },
-    { id: 6, situacao: "em aberto", cliente: "Nina Albuquerque" },
-    { id: 7, situacao: "finalizado", cliente: "Pietro Ferguncio" },
-    { id: 8, situacao: "finalizado", cliente: "Cora Coralina" },
-    { id: 9, situacao: "em aberto", cliente: "Fernando Pessoa" },
-    { id: 10, situacao: "finalizado", cliente: "Rubem Alves" },
-    { id: 11, situacao: "finalizado", cliente: "Jose Saraiva" },
-    { id: 12, situacao: "em aberto", cliente: "Dado Diamantrio" }
+    { codigoPedido: 1, dataPedido: new Date(), situacao: "em aberto", cliente: "Josefin Faria", codigoEntregador: 12 },
+    { codigoPedido: 2, dataPedido: new Date(), situacao: "finalizado", cliente: "Alberto Damagio", codigoEntregador: 3 },
+    { codigoPedido: 3, dataPedido: new Date(), situacao: "em aberto", cliente: "Kenedy Triton", codigoEntregador: 10 },
+    { codigoPedido: 4, dataPedido: new Date(), situacao: "em aberto", cliente: "Leandro Donato", codigoEntregador: 9 },
+    { codigoPedido: 5, dataPedido: new Date(), situacao: "em aberto", cliente: "Merida Spoletto", codigoEntregador: 8 },
+    { codigoPedido: 6, dataPedido: new Date(), situacao: "em aberto", cliente: "Nina Albuquerque", codigoEntregador: 7 },
+    { codigoPedido: 7, dataPedido: new Date(), situacao: "finalizado", cliente: "Pietro Ferguncio", codigoEntregador: 6 },
+    { codigoPedido: 8, dataPedido: new Date(), situacao: "finalizado", cliente: "Cora Coralina", codigoEntregador: 5 },
+    { codigoPedido: 9, dataPedido: new Date(), situacao: "em aberto", cliente: "Fernando Pessoa", codigoEntregador: 4 },
+    { codigoPedido: 10, dataPedido: new Date(), situacao: "finalizado", cliente: "Rubem Alves", codigoEntregador: 11 },
+    { codigoPedido: 11, dataPedido: new Date(), situacao: "finalizado", cliente: "Jose Saraiva", codigoEntregador: 2 },
+    { codigoPedido: 12, dataPedido: new Date(), situacao: "em aberto", cliente: "Dado Diamantrio", codigoEntregador: 1 }
 ];
 
-// inserirPedidos(pedidos); // deve ser retirado quando a API estiver fucnionando
+inserirPedidos(pedidos); // deve ser retirado quando a API estiver fucnionando
 acessarListaDePedidosDoBancoDeDados(linkApi);
 
 //----------- FUNÇÕES
@@ -35,7 +35,7 @@ function inserirPedidos(pedidos) {
         listaPedidos.append(novoPedido);
 
         const pedido = document.querySelectorAll('.btn-pedido');
-        pedido[indice].textContent = `Código do pedido: ${item.id}`; // mudar para codigoPedido
+        pedido[indice].textContent = `Código do pedido: ${item.codigoPedido}`; // mudar para codigoPedido
 
         pedido[indice].addEventListener('click', () => {
             window.location.href = '../ConfirmarCancelar/index.html'; // mudar para IniciarPedido
