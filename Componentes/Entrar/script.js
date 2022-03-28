@@ -1,4 +1,5 @@
 import { alerta } from "../util.js";
+// import jwt_decode from "jwt-decode";
 
 const login = document.querySelector('button');
 const urlLogin = "http://localhost:8080/login";
@@ -36,10 +37,18 @@ async function logar() {
                         senha: senha
                     })
                 }).then((response) => {
-                    response.status === 200 ? response.json() : alerta(".alert-danger", "Usuário e/ou senha incorretos!");
-                }).then(token => {
-                    localStorage.setItem("token", "headers", token.token, token.headers);
-                    window.location.href = '../ListaPedidos/index.html';
+                    if (response.status === 200) {
+                        response.json()
+                            .then((token) => {
+                                if (response.status === 200) {
+                                    localStorage.setItem("token", token.token);
+                                    window.location.href = '../ListaPedidos/index.html'
+                                }
+                            })
+                    } else {
+                        alerta(".alert-danger", "Usuário e/ou senha incorretos!")
+                        return;
+                    }
                 })
             } catch (error) {
                 alerta(".alert-danger", "Erro ao conectar!");
