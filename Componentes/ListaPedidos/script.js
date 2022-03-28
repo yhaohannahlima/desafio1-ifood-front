@@ -7,7 +7,7 @@ const linkApi = 'http://localhost:8080/pedidos/abertos';
 acessarListaDePedidosDoBancoDeDados(linkApi);
 
 async function acessarListaDePedidosDoBancoDeDados(linkApi) {
-    await fetch(linkApi).then(function (response) {
+    await fetch(linkApi).then(function(response) {
         if (!response.ok) {
             alerta(".alert-danger", "Não foi possível acessar a lista de pedidos!!!"); // colocar mensagem da API
 
