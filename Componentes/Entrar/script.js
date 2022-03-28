@@ -1,3 +1,4 @@
+import { alerta } from "../util.js";
 const login = document.getElementById('login');
 const urlLogin = "http://localhost:8080/login";
 async function logar() {

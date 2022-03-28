@@ -7,7 +7,13 @@ const linkApi = 'http://localhost:8080/pedidos/abertos';
 acessarListaDePedidosDoBancoDeDados(linkApi);
 
 async function acessarListaDePedidosDoBancoDeDados(linkApi) {
+<<<<<<< HEAD
     await fetch(linkApi).then(function(response) {
+=======
+    localStorage.removeItem('Dados do pedido');
+
+    await fetch(linkApi).then(function (response) {
+>>>>>>> 6908d502ffdaa359696838ad659f01397563e642
         if (!response.ok) {
             alerta(".alert-danger", "Não foi possível acessar a lista de pedidos!!!"); // colocar mensagem da API
 
@@ -17,18 +23,11 @@ async function acessarListaDePedidosDoBancoDeDados(linkApi) {
         try {
             const promiseBody = response.json();
 
-            promiseBody.then((body) => {
+            promiseBody.then((promessaCorpo) => {
+                const body = promessaCorpo.sort((a, b) => a.codigoPedido - b.codigoPedido);
+
                 body.forEach((item, indice) => {
                     if (item.statusPedido != "aberto") {
-                        return;
-                    }
-
-                    if (indice === (body.length - 1)) {
-                        const carregando = document.querySelector('.spinner-border');
-                        const carregandoTexto = document.querySelector('.carregando-texto');
-
-                        carregando.style.display = 'none';
-                        carregandoTexto.style.display = 'none';
                         return;
                     }
 
@@ -43,10 +42,17 @@ async function acessarListaDePedidosDoBancoDeDados(linkApi) {
 
                     pedido[indice].addEventListener('click', () => {
                         window.location.href = '../ConfirmarCancelar/index.html'; // mudar para IniciarPedido
-                        localStorage.setItem('Dados do pedido', JSON.stringify(pedidos[indice]));
+                        localStorage.setItem('Dados do pedido', JSON.stringify(body[indice]));
                     });
 
-                    // localStorage.setItem('Lista de Pedidos', listaPedidosAberto);
+                    if (indice === (body.length - 1)) {
+                        const carregando = document.querySelector('.spinner-border');
+                        const carregandoTexto = document.querySelector('.carregando-texto');
+
+                        carregando.style.display = 'none';
+                        carregandoTexto.style.display = 'none';
+                        return;
+                    }
                 });
             });
         } catch (error) {
