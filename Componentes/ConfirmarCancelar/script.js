@@ -33,12 +33,12 @@ const intervalo = 3000;
 let i = 0; // retirar após a integração com a API
 
 const intervalID = window.setInterval(() => {
-    pontoAtual.pop();
-    pontoAtual.push(listaDePontosFake[i]); // retirar após a integração com a API
-
-    marcarPontoDeGeolocalizacaoDaListaFake(pontoAtual); // retirar após a integração com a API
-
-    i++;
+    if (pontoAtual.length === 1) {
+        pontoAtual.pop();
+        pontoAtual.push(listaDePontosFake[i]); // retirar após a integração com a API
+        marcarPontoDeGeolocalizacaoDaListaFake(pontoAtual); // retirar após a integração com a API
+        i++;
+    }
 
     // // retirar após a integração com a Api
     // if (i < 12) {
@@ -64,7 +64,7 @@ function marcarPontoDeGeolocalizacaoDaListaFake(ponto) {
 
     if (ponto[0].latitude === pontoFinalFake.latitude && ponto[0].longitude === pontoFinalFake.longitude) {
         enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto);
-        clearInterval(intervalID);
+        clearInterval(intervalID); //retirar
         return;
     }
     enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto);
@@ -109,17 +109,14 @@ async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
     }
 }
 
-async function enviarUltimoDadoAoConcluir() {
+async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
     try {
         const idPedido = pedidoObj.codigoPedido;
         const idEntregador = {
             idEntregador: pedidoObj.codigoEntregador
         };
 
-        console.log(idPedido);
-        console.log(idEntregador);
-
-        await fetch(`${urlBase}/pedidos/finalizar/${idPedido}`, {
+        await fetch(`${urlBase}${tipoDeFinalizacao}${idPedido}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -127,10 +124,9 @@ async function enviarUltimoDadoAoConcluir() {
             body: JSON.stringify(idEntregador)
 
         }).then((response) => {
-            console.log(response)
             if (response.status === "200") {
                 window.location.href = "../ListaPedidos/index.html";
-                localStorage.clear();
+                localStorage.removeItem('Dados do pedido');
             } else {
                 return alerta(".alert-warning", "Não foi possível finalizar o pedido!!!"); // colocar mensagem da API
             }
@@ -144,26 +140,28 @@ async function enviarUltimoDadoAoConcluir() {
 
 function concluirPedido() {
     const botaoConcluirPedido = document.querySelector('.btn-concluir');
+    const tipoDeFinalizacao = '/pedidos/finalizar/';
 
     botaoConcluirPedido.addEventListener('click', () => {
         enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
         clearInterval(intervalID);
 
-        enviarUltimoDadoAoConcluir();
+        enviarUltimoDadoAoConcluir(tipoDeFinalizacao);
         return;
-    })
+    });
 }
 
 function cancelarPedido() {
     const botaoCancelarPedido = document.querySelector('.btn-cancelar');
+    const tipoDeFinalizacao = '/pedidos/cancelar/';
 
     botaoCancelarPedido.addEventListener('click', () => {
-        enviarPontoDeGeolocalizacaoParaApiContinuamente();
+        enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
         clearInterval(intervalID);
 
-        enviarUltimoDadoAoConcluir();
+        enviarUltimoDadoAoConcluir(tipoDeFinalizacao);
         return;
-    })
+    });
 }
 
 
