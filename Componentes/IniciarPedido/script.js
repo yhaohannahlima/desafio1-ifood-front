@@ -1,28 +1,18 @@
 import { alerta } from "../util.js";
 
 const urlBase = 'http://localhost:8080';
-const linkApi = `${urlBase}/pedidos/aceitar/${idPedido}`; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
-//let idWatch;
+const token = localStorage.getItem('token');
 const pedidoString = localStorage.getItem('Dados do pedido');
 const pedidoObj = JSON.parse(pedidoString);
-const idPedido = Number(pedidoObj.codigoPedido);
-const latitudePedido = Number(pedidoObj.cliente.latitude);
-const longitudePedido = Number(pedidoObj.cliente.longitude);
-const pontoInicialPedido = Number(pedidoObj.listaRastreio[0])
-const idEntregadorSrting = localStorage.getItem('idEntregador');
-const idEntregador = JSON.parse(idEntregadorSrting);
-const iniciarCorrida = document.querySelector('button .btn-iniciar');
+const idPedido = pedidoObj.codigoPedido;
+const idEntregador = localStorage.getItem('idEntregador');
+const iniciarCorrida = document.querySelector('button');
 
-const pedidoNaTela = document.querySelector('div .card_pedido"');
-const nomeCliente = document.querySelector('div card_cliente');
-console.log(`Quero ver o ${pedidoObj}`);
-console.log("Clicou");
-preencherInformacoesPedido();
-
-function preencherInformacoesPedido() {
-    pedidoNaTela.textContent = `Pedido: #${pedidoObj.codigoPedido}`;
-    nomeCliente.textContent = `Cliente: ${pedidoObj.cliente.nome}`;
-}
+const linkApi = `${urlBase}/pedidos/aceitar/${idPedido}`; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
+const pedidoNaTela = document.querySelector('div .card_pedido');
+pedidoNaTela.textContent = `Pedido: #${pedidoObj.codigoPedido}`;
+const nomeCliente = document.querySelector('div .card_cliente');
+nomeCliente.textContent = `Cliente: ${pedidoObj.cliente.nome}`;
 
 
 iniciarCorrida.addEventListener(('click'), () => {
@@ -30,28 +20,38 @@ iniciarCorrida.addEventListener(('click'), () => {
 });
 
 function enviosDeDados() {
-    if (!idPedido || !latitudePedido || !longitudePedido || !pontoInicialPedido) {
+    if (!idEntregador) {
         alerta(".alert-danger", "Problemas no pedido.")
         return;
     }
     try {
-        await fetch(`${linkApi}`, {
+        fetch(`${linkApi}`, {
             method: 'PUT',
             headers: {
+                'Authorization': token,
                 "Accept": "application/json",
                 "content-type": "application/json"
             },
             body: JSON.stringify({
-                codigoPedido: idPedido
+                idEntregador: idEntregador
             })
         }).then((resposta) => {
-            if (resposta.status === 200) { // modificar para guardar os dados que não foram enviados
-                localStorage.setItem("idPedido", resposta.codigoPedido);
-                window.location.href = '../ConfirmarCancelar/index.html'
-                return;
-            } else {
-                alerta(".alert-warning", "Problemas com a conexão."); // colocar mensagem da API
-                return;
+            switch (resposta.status) {
+                case 404:
+                    alerta(".alert-warning", "Problemas no servdor.");
+                    break;
+                case 409:
+                    alerta(".alert-warning", "Pedido finalizado.");
+                    break;
+                case 400:
+                    alerta(".alert-warning", "Erro de aplicação.");
+                    break;
+                case 401:
+                    alerta(".alert-warning", "Pedido não autorizado.");
+                    break;
+                default:
+                    window.location.href = '../ConfirmarCancelar/index.html'
+                    return;
             }
         });
     } catch (error) {
