@@ -113,7 +113,7 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
     try {
         const idPedido = pedidoObj.codigoPedido;
         const idEntregador = {
-            idEntregador: pedidoObj.codigoEntregador
+            idEntregador: pedidoObj.entregador.codigoEntregador
         };
 
         await fetch(`${urlBase}${tipoDeFinalizacao}${idPedido}`, {
@@ -124,7 +124,7 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
             body: JSON.stringify(idEntregador)
 
         }).then((response) => {
-            if (response.status === "200") {
+            if (response.status === 200) {
                 window.location.href = "../ListaPedidos/index.html";
                 localStorage.removeItem('Dados do pedido');
             } else {
