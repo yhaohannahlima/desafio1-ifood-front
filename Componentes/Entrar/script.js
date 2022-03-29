@@ -2,7 +2,8 @@ import { alerta } from "../util.js";
 
 const login = document.querySelector('button');
 const urlLogin = "http://localhost:8080/login";
-
+const tokenExpiradoString = localStorage.getItem("token expirado");
+const tokenExpirado = JSON.parse(tokenExpiradoString);
 login.addEventListener(('click'), () => {
     logar();
 });
@@ -39,10 +40,17 @@ async function logar() {
                     if (resposta.status === 200) {
                         resposta.json()
                             .then((dadosResposta) => {
-                                const idEntregador = parseJwt(dadosResposta.token);
-                                localStorage.setItem("token", dadosResposta.token);
-                                localStorage.setItem("idEntregador", idEntregador.sub);
-                                window.location.href = '../ListaPedidos/index.html'
+                                if (tokenExpirado === true) {
+                                    const idEntregador = parseJwt(dadosResposta.token);
+                                    localStorage.setItem("token", dadosResposta.token);
+                                    localStorage.setItem("idEntregador", idEntregador.sub);
+                                    window.location.href = '../ConfirmarCancelar/index.html';
+                                } else {
+                                    const idEntregador = parseJwt(dadosResposta.token);
+                                    localStorage.setItem("token", dadosResposta.token);
+                                    localStorage.setItem("idEntregador", idEntregador.sub);
+                                    window.location.href = '../ListaPedidos/index.html';
+                                }
                             })
                     } else {
                         alerta(".alert-danger", "Usuário e/ou senha incorretos!")
