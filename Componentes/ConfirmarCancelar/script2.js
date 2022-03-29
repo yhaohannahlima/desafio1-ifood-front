@@ -18,7 +18,13 @@ cancelarPedido();
 
 const intervalID = window.setInterval(() => { 
     getLocation();
-    enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
+
+    console.log(pontoAtual);
+
+    if(pontoAtual.length !== 0) {
+        enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
+    }
+
 }, intervalo);
 
 
@@ -41,7 +47,7 @@ function marcarPontoDeGeolocalizacao(position) {
 }
 
 function posicaoError(erro) {
-    alerta(".alert-warning", `Erro ${erro.code}: ${erro.message}`);
+    alerta(".alert-warning", "Não foi possível acessar a sua localização!");
 }
 
 function getLocation() {
@@ -93,7 +99,7 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
     try {
         const idPedido = pedidoObj.codigoPedido;
         const idEntregador = {
-            idEntregador: pedidoObj.codigoEntregador
+            idEntregador: pedidoObj.entregador.codigoEntregador
         };
 
         await fetch(`${urlBase}${tipoDeFinalizacao}${idPedido}`, {
@@ -104,7 +110,7 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
             body: JSON.stringify(idEntregador)
 
         }).then((response) => {
-            if (response.status === "200") {
+            if (response.status === 200) {
                 window.location.href = "../ListaPedidos/index.html";
                 localStorage.removeItem('Dados do pedido');
             } else {
@@ -144,31 +150,3 @@ function cancelarPedido() {
         return;
     });
 }
-
-// let timestamp = 1648511062106;
-// let date = new Date(timestamp);
-
-// console.log("Date: " + date.getDate() +
-//     "/" + (date.getMonth() + 1) +
-//     "/" + date.getFullYear() +
-//     " " + date.getHours() +
-//     ":" + date.getMinutes() +
-//     ":" + date.getSeconds());
-
-// const teste = document.querySelector("body");
-// function getLocation() {
-//     if (navigator.geolocation) {
-//         navigator.geolocation.getCurrentPosition(showPosition);
-//     } else {
-//         teste.innerHTML = "Geolocation is not supported by this browser.";
-//     }
-// }
-
-// function showPosition(position) {
-//     teste.innerHTML = "Latitude: " + position.coords.latitude +
-//         "<br>Longitude: " + position.coords.longitude + 
-//         "<br>Timestamp: " + position.timestamp.getTime();
-// }
-
-// //ponto final fake
-// const pontoAtual = [];
