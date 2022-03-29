@@ -1,4 +1,4 @@
-export function alerta(tipoAlerta, mensagem, redirecionamento, fechar) {
+export function alerta(tipoAlerta, mensagem, redirecionamento, fechar, parametroTela) {
     const alerta = document.querySelector(tipoAlerta);
 
     alerta.classList.remove('hidden');
@@ -10,6 +10,11 @@ export function alerta(tipoAlerta, mensagem, redirecionamento, fechar) {
 
         if(redirecionamento) {
             window.location.href = "../Entrar/index.html";
+
+            if (parametroTela) {
+                localStorage.setItem('token expirado','true');
+            }
+
         }
     });
 

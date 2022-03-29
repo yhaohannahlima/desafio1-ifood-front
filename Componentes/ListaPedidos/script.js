@@ -53,7 +53,7 @@ async function acessarListaDePedidosDoBancoDeDados() {
                     carregando.classList.add('hidden');
 
                     alerta(".alert-danger",
-                        "Você não tem autorização para acessar esse recurso! Clique aqui e insira seu email e senha.",
+                        "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
                         true);
                     return;
                 }
