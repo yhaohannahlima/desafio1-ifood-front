@@ -9,9 +9,9 @@ const idEntregador = localStorage.getItem('idEntregador');
 const iniciarCorrida = document.querySelector('button');
 
 const linkApi = `${urlBase}/pedidos/aceitar/${idPedido}`; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
-const pedidoNaTela = document.querySelector('div .card_pedido');
+const pedidoNaTela = document.querySelector('div .card-pedido');
 pedidoNaTela.textContent = `Pedido: #${pedidoObj.codigoPedido}`;
-const nomeCliente = document.querySelector('div .card_cliente');
+const nomeCliente = document.querySelector('div .card-cliente');
 nomeCliente.textContent = `Cliente: ${pedidoObj.cliente.nome}`;
 
 
