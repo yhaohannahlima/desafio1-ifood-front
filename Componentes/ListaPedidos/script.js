@@ -9,7 +9,7 @@ acessarListaDePedidosDoBancoDeDados(linkApi);
 async function acessarListaDePedidosDoBancoDeDados(linkApi) {
     localStorage.removeItem('Dados do pedido');
 
-    await fetch(linkApi).then(function (response) {
+    await fetch(linkApi).then(function(response) {
         if (!response.ok) {
             alerta(".alert-danger", "Não foi possível acessar a lista de pedidos!!!"); // colocar mensagem da API
 
