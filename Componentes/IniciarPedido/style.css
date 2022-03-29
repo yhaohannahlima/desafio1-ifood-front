@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: contain;
+    height: 100vh;
+}
+
+.tela-telefone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 18rem;
+    height: 30rem;
+    padding: 0.5rem;
+    border: solid 0.05rem rgba(0, 0, 0, 1);
+    gap: 0.5rem;
+}
+
+.card_pedido {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 10%;
+    background-color: rgb(71, 71, 71);
+    color: white;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.card_cliente {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 10%;
+    background-color: rgb(197, 192, 192);
+    border-radius: 8px;
+    width: 100%;
+}
+
+.btn-iniciar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    padding: 3px;
+    background-color: rgb(12, 116, 12);
+    border-radius: 8px;
+    margin-top: 12px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.hidden {
+    display: none;
+}
