@@ -6,29 +6,19 @@ const nomeCliente = document.querySelector('div .cliente');
 const pedidoString = localStorage.getItem('Dados do pedido');
 const pedidoObj = JSON.parse(pedidoString);
 
-const urlBase = 'http://localhost:8080';
+const urlBase = 'http://localhost:8080'; //colocar no util.js
 
 let idWatch;
 const pontoAtual = [];
-const pontoMarcado = [];
-const intervalo = 1000;
+const intervalo = 10000;
 
 preencherInformacoesPedido();
 concluirPedido();
 cancelarPedido();
 
-const intervalID = window.setInterval(() => {
+const intervalID = window.setInterval(() => { 
     getLocation();
-
-    if (pontoMarcado.length !== 0 && pontoAtual[0].tempo === pontoMarcado[0].tempo) {
-        return;
-    } else {
-        if (pontoAtual.length !== 0) {
-            pontoMarcado.pop();
-            pontoMarcado.push(pontoAtual[0]);
-            enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
-        }
-    }
+    enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
 }, intervalo);
 
 
@@ -63,9 +53,9 @@ function getLocation() {
 }
 
 async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
-    const latitude = ponto[0].latitude; //colocar o ponto real
-    const longitude = ponto[0].longitude; //colocar o ponto real
-    const tempo = ponto[0].tempo; //colocar o ponto real
+    const latitude = ponto[0].latitude; 
+    const longitude = ponto[0].longitude; 
+    const tempo = ponto[0].tempo; 
 
     if (!pedidoObj.codigoPedido || !latitude || !longitude || !tempo) {
         return;
@@ -76,14 +66,10 @@ async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
             latitude: latitude,
             longitude: longitude,
             tempo: tempo,
-            pedido: {
-                idPedido: pedidoObj.codigoPedido
-            }
+            idPedido: pedidoObj.codigoPedido
         }
 
-        console.log(dadosDoPedido)
-
-        await fetch(`${urlBase}/rastreamento`, {
+        await fetch(`${urlBase}/rastreamento`, { //authorization
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -130,7 +116,6 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
         return alerta(".alert-danger", error.message); // colocar mensagem da API
     }
 }
-
 
 function concluirPedido() {
     const botaoConcluirPedido = document.querySelector('.btn-concluir');
