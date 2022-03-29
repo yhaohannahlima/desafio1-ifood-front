@@ -3,6 +3,11 @@ import { alerta } from "../util.js";
 const login = document.querySelector('button');
 const urlLogin = "http://localhost:8080/login";
 
+localStorage.removeItem("token");
+localStorage.removeItem("idEntregador");
+localStorage.removeItem("Dados do pedido")
+
+
 login.addEventListener(('click'), () => {
     logar();
 });
