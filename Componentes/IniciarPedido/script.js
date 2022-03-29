@@ -1,70 +1,61 @@
-const listaPedidos = document.querySelector('div .lista-pedidos');
-const linkApi = 'http://localhost:8080//pedidos/aceitar/{idPedido}'; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
-const pedido = JSON.parse(localStorage.getItem('idPedido'));
-const idEntregador = JSON.parse(localStorage.getItem('idEntregador'));
+import { alerta } from "../util.js";
 
-//lista fake
-const pedidos = [
-    { id: 1, situacao: "em aberto", cliente: "Josefin Faria" }
-];
+const urlBase = 'http://localhost:8080';
+const token = localStorage.getItem('token');
+const pedidoString = localStorage.getItem('Dados do pedido');
+const pedidoObj = JSON.parse(pedidoString);
+const idPedido = pedidoObj.codigoPedido;
+const idEntregador = localStorage.getItem('idEntregador');
+const iniciarCorrida = document.querySelector('button');
 
-// inserirPedidos(pedidos); // deve ser retirado quando a API estiver fucnionando
-acessarListaDePedidosDoBancoDeDados(linkApi);
+const linkApi = `${urlBase}/pedidos/aceitar/${idPedido}`; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
+const pedidoNaTela = document.querySelector('div .card-pedido');
+pedidoNaTela.textContent = `Pedido: #${pedidoObj.codigoPedido}`;
+const nomeCliente = document.querySelector('div .card-cliente');
+nomeCliente.textContent = `Cliente: ${pedidoObj.cliente.nome}`;
 
-//----------- FUNÇÕES
-function inserirPedido(pedido) {
-    if (pedido.length === 0) {
+
+iniciarCorrida.addEventListener(('click'), () => {
+    enviosDeDados();
+});
+
+function enviosDeDados() {
+    if (!idEntregador) {
+        alerta(".alert-danger", "Problemas no pedido.")
         return;
     }
-
-    pedido.forEach((item, indice) => {
-        novoPedido = document.createElement('.tela-tefone');
-        novoPedidoClasse = novoPedido.classList.add("btn");
-        novoPedidoClasse = novoPedido.classList.add("btn-pedido");
-
-        listaPedidos.append(novoPedido);
-
-        const pedido = document.querySelectorAll('.btn-pedido');
-        pedido[indice].textContent = `Código do pedido: ${item.id}`; // mudar para codigoPedido
-
-        pedido[indice].addEventListener('click', () => {
-            window.location.href = '../ConfirmarCancelar/index.html'; // mudar para IniciarPedido
-            localStorage.setItem('Dados do pedido', JSON.stringify(pedido[indice]));
-        });
-    });
-}
-
-function acessarListaDePedidosDoBancoDeDados(linkApi) {
-    fetch(linkApi).then(function(response) {
-        if (!response.ok) {
-            alerta = document.querySelector('.alert');
-            alerta.classList.remove('hidden');
-
-            alerta.textContent = "Não foi possível acessar a lista de pedidos!!!";
-
-            alerta.addEventListener('click', () => {
-                alerta.classList.add('hidden');
-            });
-
-            return;
-        }
-
-        const promiseBody = response.json();
-
-        promiseBody.then((body) => {
-            const listaPedidosAberto = [];
-
-            body.results.forEach(item => {
-                if (item.situacao != "em aberto") {
+    try {
+        fetch(`${linkApi}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': token,
+                "Accept": "application/json",
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                idEntregador: idEntregador
+            })
+        }).then((resposta) => {
+            switch (resposta.status) {
+                case 404:
+                    alerta(".alert-warning", "Problemas no servdor.");
+                    break;
+                case 409:
+                    alerta(".alert-warning", "Pedido finalizado.");
+                    break;
+                case 400:
+                    alerta(".alert-warning", "Erro de aplicação.");
+                    break;
+                case 401:
+                    alerta(".alert-warning", "Pedido não autorizado.");
+                    break;
+                default:
+                    window.location.href = '../ConfirmarCancelar/index.html'
                     return;
-                }
-
-                listaPedidosAberto.push(item);
-            });
-
-            inserirPedidos(listaPedidosAberto);
-
-            // localStorage.setItem('Lista de Pedidos', listaPedidosAberto);
-        })
-    });
+            }
+        });
+    } catch (error) {
+        alerta(".alert-danger", "Problemas com o pedido.")
+        return;
+    }
 }

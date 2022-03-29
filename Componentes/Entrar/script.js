@@ -4,6 +4,10 @@ const login = document.querySelector('button');
 const urlLogin = "http://localhost:8080/login";
 const tokenExpiradoString = localStorage.getItem("token expirado");
 const tokenExpirado = JSON.parse(tokenExpiradoString);
+
+localStorage.removeItem("token");
+localStorage.removeItem("idEntregador");
+localStorage.removeItem("Dados do pedido")
 login.addEventListener(('click'), () => {
     logar();
 });
@@ -65,9 +69,9 @@ async function logar() {
 
 // fonte : https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
 function parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
     return JSON.parse(jsonPayload);
