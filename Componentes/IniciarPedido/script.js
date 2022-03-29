@@ -1,70 +1,24 @@
-const listaPedidos = document.querySelector('div .lista-pedidos');
-const linkApi = 'http://localhost:8080//pedidos/aceitar/{idPedido}'; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
-const pedido = JSON.parse(localStorage.getItem('idPedido'));
+//import { alerta } from "../util.js";
+
+//const urlBase = 'http://localhost:8080';
+//const linkApi = `${urlBase}/pedidos/aceitar/${pedidos.id}`; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
+//const pontoInicial = [];
+//let idWatch;
+const idPedido = Number(pedido);
+const pedido = JSON.parse(localStorage.getItem('codigoPedido'));
 const idEntregador = JSON.parse(localStorage.getItem('idEntregador'));
+const iniciarCorrida = document.querySelector('button .btn-iniciar');
 
-//lista fake
-const pedidos = [
-    { id: 1, situacao: "em aberto", cliente: "Josefin Faria" }
-];
+const pedidoNaTela = document.querySelector('div .card_pedido"');
+pedidoNaTela.textContent = `Pedido: ${pedidos.cliente[0]}`
+const nomeCliente = document.querySelector('div card_cliente');
 
-// inserirPedidos(pedidos); // deve ser retirado quando a API estiver fucnionando
-acessarListaDePedidosDoBancoDeDados(linkApi);
 
-//----------- FUNÇÕES
-function inserirPedido(pedido) {
-    if (pedido.length === 0) {
-        return;
-    }
+iniciarCorrida.addEventListener(('click'), () => {
+    funcaoClicks();
+});
 
-    pedido.forEach((item, indice) => {
-        novoPedido = document.createElement('.tela-tefone');
-        novoPedidoClasse = novoPedido.classList.add("btn");
-        novoPedidoClasse = novoPedido.classList.add("btn-pedido");
-
-        listaPedidos.append(novoPedido);
-
-        const pedido = document.querySelectorAll('.btn-pedido');
-        pedido[indice].textContent = `Código do pedido: ${item.id}`; // mudar para codigoPedido
-
-        pedido[indice].addEventListener('click', () => {
-            window.location.href = '../ConfirmarCancelar/index.html'; // mudar para IniciarPedido
-            localStorage.setItem('Dados do pedido', JSON.stringify(pedido[indice]));
-        });
-    });
-}
-
-function acessarListaDePedidosDoBancoDeDados(linkApi) {
-    fetch(linkApi).then(function(response) {
-        if (!response.ok) {
-            alerta = document.querySelector('.alert');
-            alerta.classList.remove('hidden');
-
-            alerta.textContent = "Não foi possível acessar a lista de pedidos!!!";
-
-            alerta.addEventListener('click', () => {
-                alerta.classList.add('hidden');
-            });
-
-            return;
-        }
-
-        const promiseBody = response.json();
-
-        promiseBody.then((body) => {
-            const listaPedidosAberto = [];
-
-            body.results.forEach(item => {
-                if (item.situacao != "em aberto") {
-                    return;
-                }
-
-                listaPedidosAberto.push(item);
-            });
-
-            inserirPedidos(listaPedidosAberto);
-
-            // localStorage.setItem('Lista de Pedidos', listaPedidosAberto);
-        })
-    });
+function funcaoClicks() {
+    console.log(idPedido);
+    console.log("Clicou");
 }
