@@ -19,8 +19,6 @@ cancelarPedido();
 const intervalID = window.setInterval(() => { 
     getLocation();
 
-    console.log(pontoAtual);
-
     if(pontoAtual.length !== 0) {
         enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
     }
