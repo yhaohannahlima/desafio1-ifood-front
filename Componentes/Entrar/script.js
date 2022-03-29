@@ -37,13 +37,11 @@ async function logar() {
                         email: email,
                         senha: senha
                     })
-                }).then((response) => {
-                    if (response.status === 200) {
-                        response.json()
-                            .then((token) => {
-                                // if (response.status === 200) {
-                                // }
-                                localStorage.setItem("token", token.token);
+                }).then((resposta) => {
+                    if (resposta.status === 200) {
+                        resposta.json()
+                            .then((dadosResposta) => {
+                                localStorage.setItem("dadosResposta", dadosResposta.token);
                                 window.location.href = '../ListaPedidos/index.html'
                             })
                     } else {
