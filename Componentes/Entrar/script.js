@@ -1,4 +1,5 @@
 import { alerta } from "../util.js";
+// import jsonwebTokenService from 'jsonwebtoken';
 // import jwt_decode from "jwt-decode";
 
 const login = document.querySelector('button');
@@ -40,10 +41,10 @@ async function logar() {
                     if (response.status === 200) {
                         response.json()
                             .then((token) => {
-                                if (response.status === 200) {
-                                    localStorage.setItem("token", token.token);
-                                    window.location.href = '../ListaPedidos/index.html'
-                                }
+                                // if (response.status === 200) {
+                                // }
+                                localStorage.setItem("token", token.token);
+                                window.location.href = '../ListaPedidos/index.html'
                             })
                     } else {
                         alerta(".alert-danger", "Usuário e/ou senha incorretos!")
