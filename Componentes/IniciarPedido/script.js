@@ -1,6 +1,7 @@
 const listaPedidos = document.querySelector('div .lista-pedidos');
-const linkApi = 'http://localhost:8080/pedidos/abertos/'; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
-
+const linkApi = 'http://localhost:8080//pedidos/aceitar/{idPedido}'; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
+const pedido = JSON.parse(localStorage.getItem('idPedido'));
+const idEntregador = JSON.parse(localStorage.getItem('idEntregador'));
 
 //lista fake
 const pedidos = [
