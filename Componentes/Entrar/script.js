@@ -1,6 +1,4 @@
 import { alerta } from "../util.js";
-// import jsonwebTokenService from 'jsonwebtoken';
-// import jwt_decode from "jwt-decode";
 
 const login = document.querySelector('button');
 const urlLogin = "http://localhost:8080/login";
