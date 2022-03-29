@@ -20,7 +20,7 @@ console.log("Clicou");
 preencherInformacoesPedido();
 
 function preencherInformacoesPedido() {
-    pedidoNaTela.textContent = `Pedido: #${pedidoObj.codigoPedido}`
+    pedidoNaTela.textContent = `Pedido: #${pedidoObj.codigoPedido}`;
     nomeCliente.textContent = `Cliente: ${pedidoObj.cliente.nome}`;
 }
 
@@ -42,23 +42,15 @@ function enviosDeDados() {
                 "content-type": "application/json"
             },
             body: JSON.stringify({
-                latitude: latitudePedido,
-                longitude: longitudePedido,
-                tempo: pontoInicialPedido,
-                pedido: {
-                    codigoPedido: idPedido
-                }
+                codigoPedido: idPedido
             })
         }).then((resposta) => {
             if (resposta.status === 200) { // modificar para guardar os dados que não foram enviados
-                localStorage.setItem("latitudeDoPedido", dadosResposta.latitude);
-                localStorage.setItem("longitudeDoPedido", dadosResposta.longitude);
-                localStorage.setItem("pontoInicialPedido", dadosResposta.tempo);
-                localStorage.setItem("idPedido", dadosResposta.pedido.codigoPedido);
+                localStorage.setItem("idPedido", resposta.codigoPedido);
                 window.location.href = '../ConfirmarCancelar/index.html'
                 return;
             } else {
-                alerta(".alert-warning", "Sua localização não está sendo enviada!!!"); // colocar mensagem da API
+                alerta(".alert-warning", "Problemas com a conexão."); // colocar mensagem da API
                 return;
             }
         });
