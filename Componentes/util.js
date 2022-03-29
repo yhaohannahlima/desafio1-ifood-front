@@ -1,4 +1,4 @@
-export function alerta(tipoAlerta, mensagem) {
+export function alerta(tipoAlerta, mensagem, redirecionamento, fechar) {
     const alerta = document.querySelector(tipoAlerta);
 
     alerta.classList.remove('hidden');
@@ -7,9 +7,15 @@ export function alerta(tipoAlerta, mensagem) {
 
     alerta.addEventListener('click', () => {
         alerta.classList.add('hidden');
+
+        if(redirecionamento) {
+            window.location.href = "../Entrar/index.html";
+        }
     });
 
-    setTimeout(() => {
-        alerta.classList.add('hidden');
-    }, 1000);
+    if(fechar) {
+        setTimeout(() => {
+            alerta.classList.add('hidden');
+        }, 5000);
+    }
 }

@@ -104,12 +104,19 @@ body {
     z-index: 1;
 }
 
-.spinner-border.text-danger {
-    width: 6rem;
-    height: 6rem;
+.carregar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     position: absolute;
     top: 30%;
+}
+
+.spinner-border.text-danger {
+    width: 6rem;
+    height: 6rem;   
 }
 
 .carregando-texto {
@@ -117,7 +124,7 @@ body {
     font-size: 0.8rem;
 
     position: absolute;
-    top: 39%; 
+    top: 39%;
 }
 
 .hidden {
