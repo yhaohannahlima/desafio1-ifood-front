@@ -1,6 +1,6 @@
 import { alerta } from "../util.js";
+import { defineUrlBase as urlBase } from "../util.js";
 
-const urlBase = 'http://localhost:8080';
 const token = localStorage.getItem('token');
 const pedidoString = localStorage.getItem('Dados do pedido');
 const pedidoObj = JSON.parse(pedidoString);
@@ -8,7 +8,7 @@ const idPedido = pedidoObj.codigoPedido;
 const idEntregador = localStorage.getItem('idEntregador');
 const iniciarCorrida = document.querySelector('button');
 
-const linkApi = `${urlBase}/pedidos/aceitar/${idPedido}`; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
+const linkApi = `${urlBase()}/pedidos/aceitar/${idPedido}`; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
 const pedidoNaTela = document.querySelector('div .card-pedido');
 pedidoNaTela.textContent = `Pedido: #${pedidoObj.codigoPedido}`;
 const nomeCliente = document.querySelector('div .card-cliente');

@@ -1,12 +1,11 @@
 import { alerta } from "../util.js";
+import { defineUrlBase as urlBase } from "../util.js";
 
 const pedido = document.querySelector('div .pagina-pedidos');
 const nomeCliente = document.querySelector('div .cliente');
 
 const pedidoString = localStorage.getItem('Dados do pedido');
 const pedidoObj = JSON.parse(pedidoString);
-
-const urlBase = 'http://localhost:8080';
 
 
 // lista fake de pontos
@@ -39,13 +38,6 @@ const intervalID = window.setInterval(() => {
         marcarPontoDeGeolocalizacaoDaListaFake(pontoAtual); // retirar após a integração com a API
         i++;
     }
-
-    // // retirar após a integração com a Api
-    // if (i < 12) {
-    //     i++;
-    // } else {
-    //     i = 0;
-    // }
 }, intervalo);
 
 
@@ -89,7 +81,7 @@ async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
             }
         }
 
-        await fetch(`${urlBase}/rastreamento`, {
+        await fetch(`${urlBase()}/rastreamento`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -116,7 +108,7 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
             idEntregador: pedidoObj.entregador.codigoEntregador
         };
 
-        await fetch(`${urlBase}${tipoDeFinalizacao}${idPedido}`, {
+        await fetch(`${urlBase()}${tipoDeFinalizacao}${idPedido}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

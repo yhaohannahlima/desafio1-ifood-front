@@ -1,8 +1,8 @@
 import { alerta } from "../util.js";
+import { defineUrlBase as urlBase } from "../util.js";
 
 const login = document.querySelector('button');
-const urlBase = 'http://localhost:8080';
-const urlLogin = `${urlBase}/login`;
+const urlLogin = `${urlBase()}/login`;
 
 const tokenExpiradoString = localStorage.getItem("token expirado");
 const tokenExpirado = JSON.parse(tokenExpiradoString);

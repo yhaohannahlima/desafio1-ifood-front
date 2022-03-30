@@ -1,8 +1,7 @@
 import { alerta } from "../util.js";
+import { defineUrlBase as urlBase } from "../util.js";
 
 const listaPedidos = document.querySelector('div .lista-pedidos');
-
-const urlBase = 'http://localhost:8080';
 
 acessarListaDePedidosDoBancoDeDados();
 
@@ -13,7 +12,7 @@ async function acessarListaDePedidosDoBancoDeDados() {
     carregando.classList.remove('hidden');
 
     try {
-        await fetch(`${urlBase}/pedidos/abertos`, { //authorization
+        await fetch(`${urlBase()}/pedidos/abertos`, { //authorization
             method: 'GET',
             headers: {
                 'Authorization': `${localStorage.getItem('token')}`,

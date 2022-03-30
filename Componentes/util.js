@@ -24,3 +24,7 @@ export function alerta(tipoAlerta, mensagem, redirecionamento, fechar, parametro
         }, 5000);
     }
 }
+
+export function defineUrlBase() {
+    return 'http://localhost:8080';
+}
