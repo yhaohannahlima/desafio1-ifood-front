@@ -104,6 +104,25 @@ body {
     z-index: 1;
 }
 
+.pedidos-entregues {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 15%;
+}
+
+.imagem-pedido {
+    width: 12rem;
+    height: 12rem;
+}
+
+.texto-pedido {
+    text-align: center;
+}
+
 .carregar {
     display: flex;
     flex-direction: column;

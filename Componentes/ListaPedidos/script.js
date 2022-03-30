@@ -9,7 +9,7 @@ async function acessarListaDePedidosDoBancoDeDados() {
     localStorage.removeItem('Dados do pedido');
     
     const carregando = document.querySelector('.carregar');
-    carregando.classList.remove('hidden');
+    carregandoVisivel(carregando);
 
     try {
         await fetch(`${urlBase()}/pedidos/abertos`, { //authorization
@@ -24,6 +24,15 @@ async function acessarListaDePedidosDoBancoDeDados() {
                 const promiseBody = response.json();
 
                 promiseBody.then((promessaCorpo) => {
+                    if(promessaCorpo.length === 0) {
+                        carregandoEscondido(carregando);
+                        
+                        const pedidosEntregues = document.querySelector(".pedidos-entregues");
+                        pedidosEntregues.classList.remove("hidden");
+                        return;
+                    }
+
+
                     const body = promessaCorpo.sort((a, b) => a.codigoPedido - b.codigoPedido);
 
                     body.forEach((item, indice) => {
@@ -42,14 +51,14 @@ async function acessarListaDePedidosDoBancoDeDados() {
                         });
 
                         if (indice === (body.length - 1)) {
-                            carregando.classList.add('hidden');
+                            carregandoEscondido(carregando);
                             return;
                         }
                     });
                 });
             } else {
                 if (response.status === 401) {
-                    carregando.classList.add('hidden');
+                    carregandoEscondido(carregando);
 
                     alerta(".alert-danger",
                         "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
@@ -58,7 +67,7 @@ async function acessarListaDePedidosDoBancoDeDados() {
                 }
 
                 if (!response.ok) {
-                    carregando.classList.add('hidden');
+                    carregandoEscondido(carregando);
 
                     alerta(".alert-danger", "Não foi possível acessar a lista de pedidos!!!"); // colocar mensagem da API
                     return;
@@ -70,3 +79,11 @@ async function acessarListaDePedidosDoBancoDeDados() {
         return alerta(".alert-danger", error.message); // colocar mensagem da API
     }
 };
+
+function carregandoVisivel(carregando) {
+    carregando.classList.remove('hidden');
+}
+
+function carregandoEscondido(carregando) {
+    carregando.classList.add('hidden');
+}
