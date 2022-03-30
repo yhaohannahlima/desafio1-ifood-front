@@ -12,7 +12,7 @@ export function alerta(tipoAlerta, mensagem, redirecionamento, fechar, parametro
             window.location.href = "../Entrar/index.html";
 
             if (parametroTela) {
-                localStorage.setItem('token-expirado','true');
+                localStorage.setItem('token-invalido','true');
             }
 
         }

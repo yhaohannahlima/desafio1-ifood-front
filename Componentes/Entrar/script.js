@@ -4,12 +4,11 @@ import { defineUrlBase as urlBase } from "../util.js";
 const login = document.querySelector('button');
 const urlLogin = `${urlBase()}/login`;
 
-const tokenExpiradoString = localStorage.getItem("token expirado");
-const tokenExpirado = JSON.parse(tokenExpiradoString);
+const tokenInvalidoString = localStorage.getItem("token-invalido");
+const tokenInvalido = JSON.parse(tokenInvalidoString);
 
 localStorage.removeItem("token");
 localStorage.removeItem("idEntregador");
-localStorage.removeItem("Dados do pedido")
 login.addEventListener(('click'), () => {
     logar();
 });
@@ -45,25 +44,25 @@ async function logar() {
                 }).then((resposta) => {
                     switch (resposta.status) {
                         case 404:
-                            alerta(".alert-warning", resposta.error.message);
+                            alerta(".alert-warning", resposta.error.mensagem);
                             break;
                         case 409:
-                            alerta(".alert-warning", resposta.error.message);
+                            alerta(".alert-warning", resposta.error.mensagem);
                             break;
                         case 400:
-                            alerta(".alert-warning", resposta.error.message);
+                            alerta(".alert-warning", resposta.error.mensagem);
                             break;
                         case 401:
-                            alerta(".alert-warning", `Não autorizado. ${resposta.error.message}`);
+                            alerta(".alert-warning", `Não autorizado. ${resposta.error.mensagem}`);
                             break;
                         case 405:
-                            alerta(".alert-warning", resposta.error.message);
+                            alerta(".alert-warning", resposta.error.mensagem);
                             break;
                         case 200:
                             resposta.json()
                                 .then((dadosResposta) => {
-                                    if (tokenExpirado === true) {
-                                        localStorage.removeItem("token-expirado");
+                                    if (tokenInvalido === true) {
+                                        localStorage.removeItem("token-invalido");
                                         setToken(dadosResposta.token, '../ConfirmarCancelar/index.html');
                                     } else {
                                         setToken(dadosResposta.token, '../ListaPedidos/index.html');
@@ -74,7 +73,7 @@ async function logar() {
                     }
                 })
             } catch (error) {
-                alerta(`.alert-danger`, `Erro ao conectar! ${error.message}`);
+                alerta(`.alert-danger`, `Erro ao conectar! ${error.mensagem}`);
             }
     }
 };

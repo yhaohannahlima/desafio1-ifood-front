@@ -33,9 +33,10 @@ function enviosDeDados() {
                 "content-type": "application/json"
             },
             body: JSON.stringify({
-                idEntregador: idEntregador
+                idEntregador: parseInt(idEntregador)
             })
         }).then((resposta) => {
+            console.log(resposta)
             switch (resposta.status) {
                 case 404:
                     alerta(".alert-warning", resposta.error.mensagem);
@@ -44,7 +45,7 @@ function enviosDeDados() {
                     alerta(".alert-warning", resposta.error.mensagem);
                     break;
                 case 400:
-                    alerta(".alert-warning", resposta.error.mensagem);
+                    alerta(".alert-warning", resposta.error);
                     break;
                 case 401:
                     alerta(".alert-danger",

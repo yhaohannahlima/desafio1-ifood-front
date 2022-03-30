@@ -11,7 +11,7 @@ const pedidoObj = JSON.parse(pedidoString);
 
 let idWatch;
 const pontoAtual = [];
-const intervalo = 3000;
+const intervalo = 20000;
 
 const carregando = document.querySelector('.carregar');
 carregandoVisivel(carregando);
@@ -115,17 +115,17 @@ async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
 async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
     try {
         const idPedido = pedidoObj.codigoPedido;
-        const idEntregador = {
-            idEntregador: localStorage.getItem('idEntregador')
-        };
+        const idEntregador = parseInt(localStorage.getItem('idEntregador'));
+
+        console.log(idEntregador)
 
         await fetch(`${urlBase()}${tipoDeFinalizacao}${idPedido}`, {
             method: 'PUT',
             headers: {
-                // 'Authorization': `${localStorage.getItem('token')}`,
+                'Authorization': `${localStorage.getItem('token')}`,
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(idEntregador)
+            body: JSON.stringify({idEntregador})
 
         }).then((response) => {
             switch (response.status) {
@@ -137,16 +137,16 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
 
                 case 200:
                     window.location.href = "../ListaPedidos/index.html";
-                    localStorage.removeItem('Dados do pedido');
                     break;
 
                 default:
+                    console.log(response)
                     return;
             }
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.mensagem); // colocar mensagem da API
+        return alerta(".alert-danger", error.mensagem);
     }
 }
 
