@@ -38,7 +38,7 @@ function enviosDeDados() {
         }).then((resposta) => {
             switch (resposta.status) {
                 case 404:
-                    alerta(".alert-warning", "Problemas no servdor.");
+                    alerta(".alert-warning", "Problemas no servidor.");
                     break;
                 case 409:
                     alerta(".alert-warning", "Pedido finalizado.");
@@ -47,7 +47,7 @@ function enviosDeDados() {
                     alerta(".alert-warning", "Erro de aplicação.");
                     break;
                 case 401:
-                    alerta(".alert-warning", "Pedido não autorizado.");
+                    alerta(".alert-warning", "Pedido não autorizado.", true);
                     break;
                 default:
                     window.location.href = '../ConfirmarCancelar/index.html'
