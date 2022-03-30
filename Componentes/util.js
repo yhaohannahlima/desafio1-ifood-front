@@ -15,6 +15,5 @@ export function alerta(tipoAlerta, mensagem) {
 }
 
 export function sairAplicacao() {
-    console.log('clicou');
     window.location.href = `/Componentes/Entrar/index.html`
 }
