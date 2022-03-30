@@ -38,16 +38,16 @@ function enviosDeDados() {
         }).then((resposta) => {
             switch (resposta.status) {
                 case 404:
-                    alerta(".alert-warning", "Problemas no servidor.");
+                    alerta(".alert-warning", resposta.error.message);
                     break;
                 case 409:
-                    alerta(".alert-warning", "Pedido finalizado.");
+                    alerta(".alert-warning", resposta.error.message);
                     break;
                 case 400:
-                    alerta(".alert-warning", "Erro de aplicação.");
+                    alerta(".alert-warning", resposta.error.message);
                     break;
                 case 401:
-                    alerta(".alert-warning", "Pedido não autorizado.", true);
+                    alerta(".alert-warning", resposta.error.message);
                     break;
                 default:
                     window.location.href = '../ConfirmarCancelar/index.html'
@@ -55,7 +55,7 @@ function enviosDeDados() {
             }
         });
     } catch (error) {
-        alerta(".alert-danger", "Problemas com o pedido.")
+        alerta(`.alert-danger`, `Problemas com o pedido. ${error.message}`)
         return;
     }
 }
