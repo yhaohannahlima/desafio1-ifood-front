@@ -1,5 +1,7 @@
 import { alerta } from "../util.js";
 import { defineUrlBase as urlBase } from "../util.js";
+import { carregandoVisivel } from "../util.js";
+import { carregandoEscondido } from "../util.js";
 
 const pedido = document.querySelector('div .pagina-pedidos');
 const nomeCliente = document.querySelector('div .cliente');
@@ -9,19 +11,29 @@ const pedidoObj = JSON.parse(pedidoString);
 
 let idWatch;
 const pontoAtual = [];
-const intervalo = 10000;
+const intervalo = 3000;
+
+const carregando = document.querySelector('.carregar');
+carregandoVisivel(carregando);
 
 preencherInformacoesPedido();
 concluirPedido();
 cancelarPedido();
 
-const intervalID = window.setInterval(() => { 
+const intervalID = window.setInterval(() => {
     getLocation();
 
-    if(pontoAtual.length !== 0) {
-        enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
-    }
+    if (pontoAtual.length !== 0) {
+        carregandoEscondido(carregando);
 
+        const imagemMoto = document.querySelector('.pedido-carregado');
+        imagemMoto.classList.remove('hidden');
+
+        const botoesConcluirCancelar = document.querySelector('.btn-concluir-cancela');
+        botoesConcluirCancelar.classList.remove('hidden');
+
+        enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
+    } 
 }, intervalo);
 
 
@@ -56,9 +68,9 @@ function getLocation() {
 }
 
 async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
-    const latitude = ponto[0].latitude; 
-    const longitude = ponto[0].longitude; 
-    const tempo = ponto[0].tempo; 
+    const latitude = ponto[0].latitude;
+    const longitude = ponto[0].longitude;
+    const tempo = ponto[0].tempo;
 
     if (!pedidoObj.codigoPedido || !latitude || !longitude || !tempo) {
         return;
@@ -72,23 +84,31 @@ async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
             idPedido: pedidoObj.codigoPedido
         }
 
-        await fetch(`${urlBase()}/rastreamento`, { //authorization
+        await fetch(`${urlBase()}/rastreamento`, {
             method: 'POST',
             headers: {
+                'Authorization': `${localStorage.getItem('token')}`,
                 'content-type': 'application/json'
             },
             body: JSON.stringify(dadosDoPedido)
         }).then((response) => {
-            if (response.status === 201) { // modificar para guardar os dados que não foram enviados
-                return;
-            } else {
-                alerta(".alert-warning", "Sua localização não está sendo enviada!!!"); // colocar mensagem da API
-                return;
+            switch (response.status) {
+                case 401:
+                    alerta(".alert-danger",
+                        "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
+                        true, false, true);
+                    break;
+
+                case 201:
+                    break;
+
+                default:
+                    return;
             }
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.message); // colocar mensagem da API
+        return alerta(".alert-danger", error.mensagem);
     }
 }
 
@@ -96,27 +116,37 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
     try {
         const idPedido = pedidoObj.codigoPedido;
         const idEntregador = {
-            idEntregador: pedidoObj.entregador.codigoEntregador
+            idEntregador: localStorage.getItem('idEntregador')
         };
 
         await fetch(`${urlBase()}${tipoDeFinalizacao}${idPedido}`, {
             method: 'PUT',
             headers: {
+                // 'Authorization': `${localStorage.getItem('token')}`,
                 'content-type': 'application/json'
             },
             body: JSON.stringify(idEntregador)
 
         }).then((response) => {
-            if (response.status === 200) {
-                window.location.href = "../ListaPedidos/index.html";
-                localStorage.removeItem('Dados do pedido');
-            } else {
-                return alerta(".alert-warning", "Não foi possível finalizar o pedido!!!"); // colocar mensagem da API
+            switch (response.status) {
+                case 401:
+                    alerta(".alert-danger",
+                        "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
+                        true, false, true);
+                    break;
+
+                case 200:
+                    window.location.href = "../ListaPedidos/index.html";
+                    localStorage.removeItem('Dados do pedido');
+                    break;
+
+                default:
+                    return;
             }
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.message); // colocar mensagem da API
+        return alerta(".alert-danger", error.mensagem); // colocar mensagem da API
     }
 }
 

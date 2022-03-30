@@ -12,7 +12,7 @@ export function alerta(tipoAlerta, mensagem, redirecionamento, fechar, parametro
             window.location.href = "../Entrar/index.html";
 
             if (parametroTela) {
-                localStorage.setItem('token expirado','true');
+                localStorage.setItem('token-expirado','true');
             }
 
         }
@@ -27,4 +27,12 @@ export function alerta(tipoAlerta, mensagem, redirecionamento, fechar, parametro
 
 export function defineUrlBase() {
     return 'http://localhost:8080';
+}
+
+export function carregandoVisivel(carregando) {
+    carregando.classList.remove('hidden');
+}
+
+export function carregandoEscondido(carregando) {
+    carregando.classList.add('hidden');
 }

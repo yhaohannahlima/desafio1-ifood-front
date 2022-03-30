@@ -63,7 +63,7 @@ async function logar() {
                             resposta.json()
                                 .then((dadosResposta) => {
                                     if (tokenExpirado === true) {
-                                        localStorage.removeItem("token expirado");
+                                        localStorage.removeItem("token-expirado");
                                         setToken(dadosResposta.token, '../ConfirmarCancelar/index.html');
                                     } else {
                                         setToken(dadosResposta.token, '../ListaPedidos/index.html');

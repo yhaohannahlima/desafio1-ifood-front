@@ -38,16 +38,18 @@ function enviosDeDados() {
         }).then((resposta) => {
             switch (resposta.status) {
                 case 404:
-                    alerta(".alert-warning", resposta.error.message);
+                    alerta(".alert-warning", resposta.error.mensagem);
                     break;
                 case 409:
-                    alerta(".alert-warning", resposta.error.message);
+                    alerta(".alert-warning", resposta.error.mensagem);
                     break;
                 case 400:
-                    alerta(".alert-warning", resposta.error.message);
+                    alerta(".alert-warning", resposta.error.mensagem);
                     break;
                 case 401:
-                    alerta(".alert-warning", resposta.error.message);
+                    alerta(".alert-danger",
+                        "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
+                        true);
                     break;
                 default:
                     window.location.href = '../ConfirmarCancelar/index.html'
@@ -55,7 +57,7 @@ function enviosDeDados() {
             }
         });
     } catch (error) {
-        alerta(`.alert-danger`, `Problemas com o pedido. ${error.message}`)
+        alerta(`.alert-danger`, `Problemas com o pedido. ${error.mensagem}`)
         return;
     }
 }
