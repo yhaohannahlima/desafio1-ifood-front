@@ -3,6 +3,23 @@ import { alerta } from "../util.js";
 const login = document.querySelector('button');
 const urlBase = 'http://localhost:8080';
 const urlLogin = `${urlBase}/login`;
+let olhoFechado = document.querySelector('img .olhoFechado');
+let olhoAberto = document.querySelector('img .olhoAberto');
+
+// olhoFechado.addEventListener(('click'), () => {
+//     console.log('clicou');
+//     let inputSenha = document.querySelector('#senha');
+
+//     if (inputSenha.getAttribute('type') == 'password') {
+//         inputSenha.setAttribute('type', 'text')
+//         olhoFechado.classList.add('hidden');
+//         olhoAberto.classList.remove('hidden');
+//     } else {
+//         inputSenha.setAttribute('type', 'password');
+//         olhoAberto.classList.add('hidden');
+//         olhoFechado.classList.remove('hidden');
+//     }
+// });
 
 const tokenExpiradoString = localStorage.getItem("token expirado");
 const tokenExpirado = JSON.parse(tokenExpiradoString);

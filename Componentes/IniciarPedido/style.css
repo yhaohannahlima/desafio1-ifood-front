@@ -60,6 +60,11 @@ body {
     text-align: center;
 }
 
+.logout {
+    width: 20%;
+    margin-top: 5rem;
+}
+
 .hidden {
     display: none;
 }

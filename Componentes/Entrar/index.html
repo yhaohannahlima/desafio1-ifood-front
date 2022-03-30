@@ -19,11 +19,15 @@
             <div class="alert alert-danger alert-warning hidden" role="alert"></div>
             <label class="card-body label_input email" for="email">
                 <p class="card-text" alt="endereço de email">Endereço email</p>
-                <input id="email" type="email">
+                <input id="email" type="email" paceholder='Email' required></input>
             </label>
             <label class="card-body label_input" for="password">
                 <p class="card-text" alt="senha">Senha</p>
-                <input id="senha" type="password">
+                <input id="senha" type="password" paceholder='**************' required>
+                <!-- <img src="../assets/olhoFechado.png" alt="senha escondida" class="olhoFechado">                
+                <img src="../assets/olhoAberto.png" alt="senha a mostrar" class="olhoAberto hidden"> -->
+        <!-- referencia do site onde foi pego esses icones. https://www.flaticon.com/br/icones-gratis/olho -->
+            </input>
             </label>
             <button id="login" class="btn btn-primary" type="submit">Login</button>
         </div>
