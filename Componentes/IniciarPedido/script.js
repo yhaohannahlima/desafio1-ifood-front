@@ -55,7 +55,7 @@ function enviosDeDados() {
             }
         });
     } catch (error) {
-        alerta(".alert-danger", "Problemas com o pedido.")
+        alerta(`.alert-danger`, `Problemas com o pedido. ${error.message}`)
         return;
     }
 }

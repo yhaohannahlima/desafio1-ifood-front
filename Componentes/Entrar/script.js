@@ -19,16 +19,16 @@ async function logar() {
     const email = document.getElementById("email").value;
     switch (senha || email) {
         case "":
-            alerta(".alert-danger", "Usuário e/ou senha incorretos!");
+            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
             break;
         case " ":
-            alerta(".alert-danger", "Usuário e/ou senha incorretos!");
+            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
             break;
         case null:
-            alerta(".alert-danger", "Usuário e/ou senha incorretos!");
+            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
             break;
         case undefined:
-            alerta(".alert-danger", "Usuário e/ou senha incorretos!");
+            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
             break;
         default:
             try {
@@ -74,7 +74,7 @@ async function logar() {
                     }
                 })
             } catch (error) {
-                alerta(".alert-danger", "Erro ao conectar!");
+                alerta(`.alert-danger`, `Erro ao conectar! ${error.message}`);
             }
     }
 };
