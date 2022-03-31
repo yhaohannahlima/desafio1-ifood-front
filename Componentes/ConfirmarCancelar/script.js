@@ -7,8 +7,7 @@ const nomeCliente = document.querySelector('div .cliente');
 const pedidoString = localStorage.getItem('Dados do pedido');
 const pedidoObj = JSON.parse(pedidoString);
 
-
-// lista fake de pontos
+// TESTES INDOOR
 const listaDePontosFake = [
     { latitude: -27.593438702513563, longitude: -48.56158550833867, tempo: new Date() },
     { latitude: -27.59196379398398, longitude: -48.56136653609618, tempo: new Date() },
@@ -24,18 +23,18 @@ const listaDePontosFake = [
     { latitude: -27.594835965974582, longitude: -48.56801234365599, tempo: new Date() }
 ];
 
-//ponto final fake
+
 const pontoAtual = [];
 const pontoFinalFake = listaDePontosFake[listaDePontosFake.length - 1];
 
 const intervalo = 3000;
-let i = 0; // retirar após a integração com a API
+let i = 0; 
 
 const intervalID = window.setInterval(() => {
     if (pontoAtual.length === 1) {
         pontoAtual.pop();
-        pontoAtual.push(listaDePontosFake[i]); // retirar após a integração com a API
-        marcarPontoDeGeolocalizacaoDaListaFake(pontoAtual); // retirar após a integração com a API
+        pontoAtual.push(listaDePontosFake[i]); 
+        marcarPontoDeGeolocalizacaoDaListaFake(pontoAtual); 
         i++;
     }
 }, intervalo);
@@ -45,27 +44,27 @@ preencherInformacoesPedido();
 concluirPedido();
 cancelarPedido();
 
-//---------- FUNÇÕES
+
 function preencherInformacoesPedido() {
     pedido.textContent = `Pedido #${pedidoObj.codigoPedido}`;
     nomeCliente.textContent = `Cliente: ${pedidoObj.cliente.nome}`;
 }
 
 function marcarPontoDeGeolocalizacaoDaListaFake(ponto) {
-    ponto[0].tempo = Date.now(); // retirar após a integração com a API
+    ponto[0].tempo = Date.now(); 
 
     if (ponto[0].latitude === pontoFinalFake.latitude && ponto[0].longitude === pontoFinalFake.longitude) {
         enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto);
-        clearInterval(intervalID); //retirar
+        clearInterval(intervalID); 
         return;
     }
     enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto);
 }
 
 async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
-    const latitude = ponto[0].latitude; //colocar o ponto real
-    const longitude = ponto[0].longitude; //colocar o ponto real
-    const tempo = ponto[0].tempo; //colocar o ponto real
+    const latitude = ponto[0].latitude; 
+    const longitude = ponto[0].longitude; 
+    const tempo = ponto[0].tempo; 
 
     if (!pedidoObj.codigoPedido || !latitude || !longitude || !tempo) {
         return;
@@ -105,7 +104,7 @@ async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.mensagem); // colocar mensagem da API
+        return alerta(".alert-danger", 'Erro ao conectar!');
     }
 }
 
@@ -140,7 +139,7 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.mensagem); // colocar mensagem da API
+        return alerta(".alert-danger", 'Erro ao conectar!'); 
     }
 }
 

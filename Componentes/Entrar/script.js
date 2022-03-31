@@ -1,4 +1,4 @@
-import { alerta, tokenExpirado } from "../util.js";
+import { alerta } from "../util.js";
 import { defineUrlBase as urlBase } from "../util.js";
 import { parseJwt } from "../util.js";
 
@@ -8,14 +8,10 @@ const urlLogin = `${urlBase()}/login`;
 const tokenInvalidoString = localStorage.getItem("token-invalido");
 const tokenInvalido = JSON.parse(tokenInvalidoString);
 
-// const paginaConfirmarString = localStorage.getItem("pagina-confirmar");
-// const paginaConfirmarBoolean = JSON.parse(paginaConfirmarString);
-
 localStorage.removeItem("token");
 localStorage.removeItem("idEntregador");
 login.addEventListener(('click'), () => {
     logar();
-    // localStorage.removeItem("token-expirado");
 });
 
 async function logar() {
@@ -23,16 +19,16 @@ async function logar() {
     const email = document.getElementById("email").value;
     switch (senha || email) {
         case "":
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            alerta(".alert-danger", "Problema com credenciais do usuário!");
             break;
         case " ":
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            alerta(".alert-danger", "Problema com credenciais do usuário!");
             break;
         case null:
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            alerta(".alert-danger", "Problema com credenciais do usuário!");
             break;
         case undefined:
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            alerta(".alert-danger", "Problema com credenciais do usuário!");
             break;
         default:
             try {
@@ -49,26 +45,25 @@ async function logar() {
                 }).then((resposta) => {
                     switch (resposta.status) {
                         case 404:
-                            alerta(".alert-warning", resposta.error.mensagem);
+                            alerta(".alert-danger", "Erro ao tentar entrar! Verifique suas credenciais.");
                             break;
                         case 409:
-                            alerta(".alert-warning", resposta.error.mensagem);
+                            alerta(".alert-danger", "Erro ao tentar entrar! Verifique suas credenciais.");
                             break;
                         case 400:
-                            alerta(".alert-warning", resposta.error.mensagem);
+                            alerta(".alert-danger", "Erro ao tentar entrar! Verifique suas credenciais.");
                             break;
                         case 401:
-                            alerta(".alert-warning", `Não autorizado. ${resposta.error.mensagem}`);
+                            alerta(".alert-danger", "Erro ao tentar entrar! Verifique suas credenciais.");
                             break;
                         case 405:
-                            alerta(".alert-warning", resposta.error.mensagem);
+                            alerta(".alert-danger", "Erro ao tentar entrar! Verifique suas credenciais.");
                             break;
                         case 200:
                             resposta.json()
                                 .then((dadosResposta) => {
                                     if (tokenInvalido === true) {
                                         localStorage.removeItem("token-invalido");
-                                        // localStorage.removeItem("pagina-confirmar");
                                         setToken(dadosResposta.token, '../ConfirmarCancelar/index.html');
                                     } else {
                                         setToken(dadosResposta.token, '../ListaPedidos/index.html');
@@ -79,7 +74,7 @@ async function logar() {
                     }
                 })
             } catch (error) {
-                alerta(`.alert-danger`, `Erro ao conectar! ${error.mensagem}`);
+                alerta('.alert-danger', 'Erro ao conectar! Por favor, tente novamente mais tarde.');
             }
     }
 };

@@ -8,16 +8,16 @@ export function alerta(tipoAlerta, mensagem, redirecionamento, fechar, parametro
     alerta.addEventListener('click', () => {
         alerta.classList.add('hidden');
 
-        if(redirecionamento) {
+        if (redirecionamento) {
             window.location.href = "../Entrar/index.html";
 
             if (parametroTela) {
-                localStorage.setItem('token-invalido','true');
+                localStorage.setItem('token-invalido', 'true');
             }
         }
     });
 
-    if(fechar) {
+    if (fechar) {
         setTimeout(() => {
             alerta.classList.add('hidden');
         }, 5000);
@@ -45,15 +45,3 @@ export function parseJwt(token) {
     }).join(''));
     return JSON.parse(jsonPayload);
 };
-
-export function tokenExpirado(token) {
-    const tokenLocalStorage = parseJwt(token);
-    const validadeString = `${tokenLocalStorage.exp}000`;
-    const validade = parseInt(validadeString);
-    
-    const tempoAtual = Date.now();
-
-    if (tempoAtual > validade) {
-        localStorage.setItem('token-expirado', 'true');
-    } 
-}
