@@ -1,6 +1,6 @@
-import { alerta } from "../componentes/util.js";
-import { defineUrlBase as urlBase } from "../util.js";
-import { parseJwt } from "../componentes/util.js";
+import { alerta } from "./componentes/util.js";
+import { defineUrlBase as urlBase } from "./componentes/util.js";
+import { parseJwt } from "./componentes/util.js";
 
 const login = document.querySelector('button');
 const urlLogin = `${urlBase()}/login`;
@@ -77,9 +77,9 @@ function logar() {
                                 .then((dadosResposta) => {
                                     if (tokenInvalido === true) {
                                         localStorage.removeItem("token-invalido");
-                                        setToken(dadosResposta.token, '../componentes/confirmarcancelar/index.html');
+                                        setToken(dadosResposta.token, '../../componentes/confirmarcancelar/index.html');
                                     } else {
-                                        setToken(dadosResposta.token, '../componentes/listapedidos/index.html');
+                                        setToken(dadosResposta.token, '../../componentes/listapedidos/index.html');
                                     }
                                 })
                         default:
