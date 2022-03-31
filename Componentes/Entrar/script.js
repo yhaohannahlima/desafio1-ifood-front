@@ -3,37 +3,59 @@ import { alerta } from "../util.js";
 const login = document.querySelector('button');
 const urlBase = 'http://localhost:8080';
 const urlLogin = `${urlBase}/login`;
-let olhoFechado = document.querySelector('img .olhoFechado');
-let olhoAberto = document.querySelector('img .olhoAberto');
-
-// olhoFechado.addEventListener(('click'), () => {
-//     console.log('clicou');
-//     let inputSenha = document.querySelector('#senha');
-
-//     if (inputSenha.getAttribute('type') == 'password') {
-//         inputSenha.setAttribute('type', 'text')
-//         olhoFechado.classList.add('hidden');
-//         olhoAberto.classList.remove('hidden');
-//     } else {
-//         inputSenha.setAttribute('type', 'password');
-//         olhoAberto.classList.add('hidden');
-//         olhoFechado.classList.remove('hidden');
-//     }
-// });
 
 const tokenExpiradoString = localStorage.getItem("token expirado");
 const tokenExpirado = JSON.parse(tokenExpiradoString);
 
 localStorage.removeItem("token");
 localStorage.removeItem("idEntregador");
-localStorage.removeItem("Dados do pedido")
-login.addEventListener(('click'), () => {
-    logar();
-});
 
-async function logar() {
-    const senha = document.getElementById("senha").value;
-    const email = document.getElementById("email").value;
+window.onload = () => {
+    login.addEventListener(('click'), () => {
+        logar();
+    });
+}
+
+// let olhoFechado = document.querySelector('img .olhoFechado');
+// let olhoAberto = document.querySelector('img .olhoAberto');
+
+// window.onload = () => {
+//     console.log("vamos ao click");
+//     olhoFechado.addEventListener(('click'), () => {
+//         console.log('clicou no olho');
+//         mostrar();
+//     });
+// }
+
+
+
+
+// function mostrar() {
+//     if (senha.getAttribute('type') == 'password') {
+//         senha.setAttribute('type', 'text')
+//         olhoFechado.classList.add('hidden');
+//         olhoAberto.classList.remove('hidden');
+//     } else {
+//         senha.setAttribute('type', 'password');
+//         olhoAberto.classList.add('hidden');
+//         olhoFechado.classList.remove('hidden');
+//     }
+// }
+
+function logar() {
+
+    console.log("etreou na function")
+    let email = document.querySelector(".email-classe").value;
+    console.log(email);
+    let senha = document.querySelector(".senha").value;
+    //     if (email !== null && senha !== null) {
+    //         email = email.value;
+    //         senha = senha;
+    //     } else {
+    //         alerta(".alert-danger", "Usuário e/ou senha incorretos!");
+    //     }
+
+    console.log(email + "\n " + senha);
     switch (senha || email) {
         case "":
             alerta(".alert-warning", "Usuário e/ou senha incorretos!");
@@ -49,7 +71,7 @@ async function logar() {
             break;
         default:
             try {
-                await fetch(urlLogin, {
+                fetch(urlLogin, {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",

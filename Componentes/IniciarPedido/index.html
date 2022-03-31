@@ -11,17 +11,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-    <script src="script.js" defer type="module"></script>
+    <script src="script.js" type="module" defer></script>
 </head>
 
 <body>
     <div class="tela-telefone">
         <div class="alert alert-danger alert-warning hidden" role="alert"></div>
-        <div class="card-pedido" role="alert"></div>
+        <div class="caixa-caixa">
+            <div class="card-pedido" role="alert"></div>
+            <img src="../assets/logout.png" alt="Sair do aplicativo" class="logout">
+        </div>
         <div class="card-cliente"></div>
         <button type="button" class="btn-iniciar" role="iniciar"><h5 >Iniciar<br>Entrega</h5></button>
-        <img src="../assets/shutdown.png" alt="Sair do aplicativo" class="logout">
-        <!-- referencia do site onde foi pego esse icone. https://www.flaticon.com/free-icons/logout -->
+        <span class="modal hidden">
+            <button type="button" class="confirmar">Confirmar</button>
+            <button type="button" class="cancelar">Cancelar</button>
+        </span>
+        <!-- referencia do site onde foi pego esse icone acima. https://www.flaticon.com/free-icons/logout -->
     </div>
 </body>
 
