@@ -16,31 +16,6 @@ window.onload = () => {
     });
 }
 
-// let olhoFechado = document.querySelector('img .olhoFechado');
-// let olhoAberto = document.querySelector('img .olhoAberto');
-
-// window.onload = () => {
-//     console.log("vamos ao click");
-//     olhoFechado.addEventListener(('click'), () => {
-//         console.log('clicou no olho');
-//         mostrar();
-//     });
-// }
-
-
-
-
-// function mostrar() {
-//     if (senha.getAttribute('type') == 'password') {
-//         senha.setAttribute('type', 'text')
-//         olhoFechado.classList.add('hidden');
-//         olhoAberto.classList.remove('hidden');
-//     } else {
-//         senha.setAttribute('type', 'password');
-//         olhoAberto.classList.add('hidden');
-//         olhoFechado.classList.remove('hidden');
-//     }
-// }
 
 function logar() {
 
@@ -133,3 +108,34 @@ function parseJwt(token) {
     }).join(''));
     return JSON.parse(jsonPayload);
 };
+
+let olhoFechado = document.querySelector('.olhoFechado');
+let olhoAberto = document.querySelector('.olhoAberto');
+olhoFechado.addEventListener(('click'), () => {
+    mostrar();
+});
+
+olhoAberto.addEventListener(('click'), () => {
+    fechar();
+})
+
+function fechar() {
+    let senha = document.querySelector(".senha-classe");
+    if (senha.getAttribute('type') == 'text') {
+        senha.setAttribute('type', 'password');
+        senha.setAttribute('placeholder', '**************')
+        olhoAberto.classList.add('hidden');
+        olhoFechado.classList.remove('hidden');
+    }
+}
+
+function mostrar() {
+    let senha = document.querySelector(".senha-classe");
+
+    if (senha.getAttribute('type') == 'password') {
+        senha.setAttribute('type', 'text')
+        senha.setAttribute('placeholder', '')
+        olhoFechado.classList.add('hidden');
+        olhoAberto.classList.remove('hidden');
+    }
+}

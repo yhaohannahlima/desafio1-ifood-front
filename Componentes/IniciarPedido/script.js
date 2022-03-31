@@ -11,7 +11,7 @@ let logout = document.querySelector('.logout');
 const tokenExpiradoString = localStorage.getItem("token expirado");
 const tokenExpirado = JSON.parse(tokenExpiradoString);
 
-const linkApi = `${urlBase}/pedidos/aceitar/${idPedido}`; // adicionar link da api (http://localhost:8080/pedidos/abertos/)
+const linkApi = `${urlBase}/pedidos/aceitar/${idPedido}`;
 const pedidoNaTela = document.querySelector('div .card-pedido');
 pedidoNaTela.textContent = `Pedido: #${pedidoObj.codigoPedido}`;
 const nomeCliente = document.querySelector('div .card-cliente');
