@@ -23,6 +23,13 @@ body {
     border: solid 0.05rem rgba(0, 0, 0, 1);
 }
 
+.caixa-caixa {
+    max-height: 65px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .card-pedido {
     display: flex;
     align-items: center;
@@ -34,6 +41,11 @@ body {
     color: #FFFFFF;
     border-radius: 5px;
     font-size: 1.4rem;
+}
+
+.logout {
+    height: 80%;
+    margin-top: 3px;
 }
 
 .card-cliente {
@@ -58,6 +70,17 @@ body {
     border-radius: 8px;
     color: white;
     text-align: center;
+}
+
+.modal {
+    border: solid 1px red;
+    padding: 30px;
+    display: block;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .hidden {
