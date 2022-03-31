@@ -1,7 +1,7 @@
-import { alerta, sairAplicacao } from "../util.js";
-import { defineUrlBase as urlBase } from "../util.js";
-import { carregandoVisivel } from "../util.js";
-import { carregandoEscondido } from "../util.js";
+import { alerta, sairAplicacao } from "../componentes/util.js";
+import { defineUrlBase as urlBase } from "../componentes/util.js";
+import { carregandoVisivel } from "../componentes/util.js";
+import { carregandoEscondido } from "../componentes/util.js";
 
 window.setInterval(() => {
     window.location.reload();
@@ -65,7 +65,7 @@ async function acessarListaDePedidosDoBancoDeDados() {
                             pedido[indice].textContent = `Código do pedido: ${item.codigoPedido}`;
 
                             pedido[indice].addEventListener('click', () => {
-                                window.location.href = '../Iniciarpedido/index.html';
+                                window.location.href = '../componentes/iniciarpedido/index.html';
                                 localStorage.setItem('Dados do pedido', JSON.stringify(body[indice]));
                             });
 

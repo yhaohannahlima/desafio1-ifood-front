@@ -1,6 +1,6 @@
-import { alerta } from "../util.js";
+import { alerta } from "../componentes/util.js";
 import { defineUrlBase as urlBase } from "../util.js";
-import { parseJwt } from "../util.js";
+import { parseJwt } from "../componentes/util.js";
 
 const login = document.querySelector('button');
 const urlLogin = `${urlBase()}/login`;

@@ -1,5 +1,5 @@
-import { alerta, sairAplicacao } from "../util.js";
-import { defineUrlBase as urlBase } from "../util.js";
+import { alerta, sairAplicacao } from "../componentes/util.js";
+import { defineUrlBase as urlBase } from "../componentes/util.js";
 
 window.setInterval(() => {
     window.location.reload();
@@ -64,7 +64,7 @@ function enviosDeDados() {
                     alerta(".alert-warning", "Deu ruim! Tente novamente.");
                     break;
                 default:
-                    window.location.href = '../ConfirmarCancelar/index.html';
+                    window.location.href = '../../componentes/confirmarcancelar/index.html';
                     return;
             }
         });

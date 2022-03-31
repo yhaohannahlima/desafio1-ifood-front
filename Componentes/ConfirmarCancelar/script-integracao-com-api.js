@@ -1,7 +1,7 @@
-import { alerta } from "../util.js";
-import { defineUrlBase as urlBase } from "../util.js";
-import { carregandoVisivel } from "../util.js";
-import { carregandoEscondido } from "../util.js";
+import { alerta } from "../componentes/util.js";
+import { defineUrlBase as urlBase } from "../componentes/util.js";
+import { carregandoVisivel } from "../componentes/util.js";
+import { carregandoEscondido } from "../componentes/util.js";
 
 const pedido = document.querySelector('div .pagina-pedidos');
 const nomeCliente = document.querySelector('div .cliente');
@@ -139,7 +139,7 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
                     break;
 
                 case 200:
-                    window.location.href = "../ListaPedidos/index.html";
+                    window.location.href = "../componentes/listapedidos/index.html";
                     break;
 
                 default:
