@@ -44,18 +44,17 @@ window.onload = () => {
 
 function logar() {
 
-    console.log("etreou na function")
     let email = document.querySelector(".email-classe").value;
-    console.log(email);
-    let senha = document.querySelector(".senha").value;
-    //     if (email !== null && senha !== null) {
-    //         email = email.value;
-    //         senha = senha;
-    //     } else {
-    //         alerta(".alert-danger", "Usuário e/ou senha incorretos!");
-    //     }
+    let senha = document.querySelector(".senha-classe").value;
+    let emailTratado = email.trim();
 
-    console.log(email + "\n " + senha);
+    if (emailTratado !== null && senha !== null) {
+        email = emailTratado;
+        senha = senha;
+    } else {
+        alerta(".alert-danger", "Usuário e/ou senha incorretos!");
+    }
+
     switch (senha || email) {
         case "":
             alerta(".alert-warning", "Usuário e/ou senha incorretos!");
