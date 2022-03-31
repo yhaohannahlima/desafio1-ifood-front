@@ -8,86 +8,78 @@ window.setInterval(() => {
     window.location.reload();
 }, 60000);
 
-// window.setInterval(() => {
-//     tokenExpirado(localStorage.getItem('token'));
-// }, 10000);
+const listaPedidos = document.querySelector('div .lista-pedidos');
 
-// if (localStorage.getItem('token-expirado')) {
-//     window.location.href = '../Entrar/index.html'; 
+acessarListaDePedidosDoBancoDeDados();
 
-// } else {
-    const listaPedidos = document.querySelector('div .lista-pedidos');
+async function acessarListaDePedidosDoBancoDeDados() {
+    localStorage.removeItem('Dados do pedido');
 
-    acessarListaDePedidosDoBancoDeDados();
+    const carregando = document.querySelector('.carregar');
+    carregandoVisivel(carregando);
 
-    async function acessarListaDePedidosDoBancoDeDados() {
-        localStorage.removeItem('Dados do pedido');
+    try {
+        await fetch(`${urlBase()}/pedidos/abertos`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `${localStorage.getItem('token')}`,
+                'content-type': 'application/json'
+            }
 
-        const carregando = document.querySelector('.carregar');
-        carregandoVisivel(carregando);
+        }).then(function (response) {
+            switch (response.status) {
+                case 401:
+                    carregandoEscondido(carregando);
+                    alerta(".alert-danger",
+                        "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
+                        true);
+                    break;
 
-        try {
-            await fetch(`${urlBase()}/pedidos/abertos`, { 
-                method: 'GET',
-                headers: {
-                    'Authorization': `${localStorage.getItem('token')}`,
-                    'content-type': 'application/json'
-                }
+                case 200:
+                    const promiseBody = response.json();
+                    promiseBody.then((promessaCorpo) => {
+                        if (promessaCorpo.length === 0) {
+                            carregandoEscondido(carregando);
 
-            }).then(function (response) {
-                switch (response.status) {
-                    case 401:
-                        carregandoEscondido(carregando);
-                        alerta(".alert-danger",
-                            "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
-                            true);
-                        break;
+                            const pedidosEntregues = document.querySelector(".pedidos-entregues");
+                            pedidosEntregues.classList.remove("hidden");
+                            return;
+                        }
 
-                    case 200:
-                        const promiseBody = response.json();
-                        promiseBody.then((promessaCorpo) => {
-                            if (promessaCorpo.length === 0) {
+
+                        const body = promessaCorpo.sort((a, b) => a.codigoPedido - b.codigoPedido);
+
+                        body.forEach((item, indice) => {
+                            const novoPedido = document.createElement('button');
+                            novoPedido.classList.add("btn");
+                            novoPedido.classList.add("btn-pedido");
+
+                            listaPedidos.append(novoPedido);
+
+                            const pedido = document.querySelectorAll('.btn-pedido');
+                            pedido[indice].textContent = `Código do pedido: ${item.codigoPedido}`;
+
+                            pedido[indice].addEventListener('click', () => {
+                                window.location.href = '../Iniciarpedido/index.html';
+                                localStorage.setItem('Dados do pedido', JSON.stringify(body[indice]));
+                            });
+
+                            if (indice === (body.length - 1)) {
                                 carregandoEscondido(carregando);
-
-                                const pedidosEntregues = document.querySelector(".pedidos-entregues");
-                                pedidosEntregues.classList.remove("hidden");
                                 return;
                             }
-
-
-                            const body = promessaCorpo.sort((a, b) => a.codigoPedido - b.codigoPedido);
-
-                            body.forEach((item, indice) => {
-                                const novoPedido = document.createElement('button');
-                                novoPedido.classList.add("btn");
-                                novoPedido.classList.add("btn-pedido");
-
-                                listaPedidos.append(novoPedido);
-
-                                const pedido = document.querySelectorAll('.btn-pedido');
-                                pedido[indice].textContent = `Código do pedido: ${item.codigoPedido}`;
-
-                                pedido[indice].addEventListener('click', () => {
-                                    window.location.href = '../Iniciarpedido/index.html';
-                                    localStorage.setItem('Dados do pedido', JSON.stringify(body[indice]));
-                                });
-
-                                if (indice === (body.length - 1)) {
-                                    carregandoEscondido(carregando);
-                                    return;
-                                }
-                            });
                         });
-                        break;
+                    });
+                    break;
 
-                    default:
-                        carregandoEscondido(carregando);
-                        return;
-                }
-            });
+                default:
+                    carregandoEscondido(carregando);
+                    return;
+            }
+        });
 
-        } catch (error) {
-            return alerta(".alert-danger", error.mensagem);
-        }
-    };
-// }
+    } catch (error) {
+        return alerta(".alert-danger", error.mensagem);
+    }
+};
+

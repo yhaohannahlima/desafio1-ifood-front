@@ -57,3 +57,7 @@ export function tokenExpirado(token) {
         localStorage.setItem('token-expirado', 'true');
     } 
 }
+
+export function sairAplicacao() {
+    window.location.href = `/Componentes/Entrar/index.html`
+}

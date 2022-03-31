@@ -13,14 +13,27 @@ const tokenInvalido = JSON.parse(tokenInvalidoString);
 
 localStorage.removeItem("token");
 localStorage.removeItem("idEntregador");
-login.addEventListener(('click'), () => {
-    logar();
-    // localStorage.removeItem("token-expirado");
-});
 
-async function logar() {
-    const senha = document.getElementById("senha").value;
-    const email = document.getElementById("email").value;
+window.onload = () => {
+    login.addEventListener(('click'), () => {
+        logar();
+    });
+}
+
+
+function logar() {
+
+    let email = document.querySelector(".email-classe").value;
+    let senha = document.querySelector(".senha-classe").value;
+    let emailTratado = email.trim();
+
+    if (emailTratado !== null && senha !== null) {
+        email = emailTratado;
+        senha = senha;
+    } else {
+        alerta(".alert-danger", "Usuário e/ou senha incorretos!");
+    }
+
     switch (senha || email) {
         case "":
             alerta(".alert-warning", "Usuário e/ou senha incorretos!");
@@ -36,7 +49,7 @@ async function logar() {
             break;
         default:
             try {
-                await fetch(urlLogin, {
+                fetch(urlLogin, {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
@@ -91,3 +104,43 @@ function setToken(dadosResposta, caminho) {
     window.location.href = caminho;
 }
 
+// fonte : https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
+function parseJwt(token) {
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+};
+
+let olhoFechado = document.querySelector('.olhoFechado');
+let olhoAberto = document.querySelector('.olhoAberto');
+olhoFechado.addEventListener(('click'), () => {
+    mostrar();
+});
+
+olhoAberto.addEventListener(('click'), () => {
+    fechar();
+})
+
+function fechar() {
+    let senha = document.querySelector(".senha-classe");
+    if (senha.getAttribute('type') == 'text') {
+        senha.setAttribute('type', 'password');
+        senha.setAttribute('placeholder', '**************')
+        olhoAberto.classList.add('hidden');
+        olhoFechado.classList.remove('hidden');
+    }
+}
+
+function mostrar() {
+    let senha = document.querySelector(".senha-classe");
+
+    if (senha.getAttribute('type') == 'password') {
+        senha.setAttribute('type', 'text')
+        senha.setAttribute('placeholder', '')
+        olhoFechado.classList.add('hidden');
+        olhoAberto.classList.remove('hidden');
+    }
+}
