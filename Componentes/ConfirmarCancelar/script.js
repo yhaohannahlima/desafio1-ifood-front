@@ -164,5 +164,3 @@ function cancelarPedido() {
         return;
     });
 }
-
-
