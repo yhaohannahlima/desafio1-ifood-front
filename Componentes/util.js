@@ -13,3 +13,7 @@ export function alerta(tipoAlerta, mensagem) {
         alerta.classList.add('hidden');
     }, 1000);
 }
+
+export function sairAplicacao() {
+    window.location.href = `/Componentes/Entrar/index.html`
+}

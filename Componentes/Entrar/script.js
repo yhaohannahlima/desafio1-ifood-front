@@ -9,14 +9,27 @@ const tokenExpirado = JSON.parse(tokenExpiradoString);
 
 localStorage.removeItem("token");
 localStorage.removeItem("idEntregador");
-localStorage.removeItem("Dados do pedido")
-login.addEventListener(('click'), () => {
-    logar();
-});
 
-async function logar() {
-    const senha = document.getElementById("senha").value;
-    const email = document.getElementById("email").value;
+window.onload = () => {
+    login.addEventListener(('click'), () => {
+        logar();
+    });
+}
+
+
+function logar() {
+
+    let email = document.querySelector(".email-classe").value;
+    let senha = document.querySelector(".senha-classe").value;
+    let emailTratado = email.trim();
+
+    if (emailTratado !== null && senha !== null) {
+        email = emailTratado;
+        senha = senha;
+    } else {
+        alerta(".alert-danger", "Usuário e/ou senha incorretos!");
+    }
+
     switch (senha || email) {
         case "":
             alerta(".alert-warning", "Usuário e/ou senha incorretos!");
@@ -32,7 +45,7 @@ async function logar() {
             break;
         default:
             try {
-                await fetch(urlLogin, {
+                fetch(urlLogin, {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
@@ -95,3 +108,34 @@ function parseJwt(token) {
     }).join(''));
     return JSON.parse(jsonPayload);
 };
+
+let olhoFechado = document.querySelector('.olhoFechado');
+let olhoAberto = document.querySelector('.olhoAberto');
+olhoFechado.addEventListener(('click'), () => {
+    mostrar();
+});
+
+olhoAberto.addEventListener(('click'), () => {
+    fechar();
+})
+
+function fechar() {
+    let senha = document.querySelector(".senha-classe");
+    if (senha.getAttribute('type') == 'text') {
+        senha.setAttribute('type', 'password');
+        senha.setAttribute('placeholder', '**************')
+        olhoAberto.classList.add('hidden');
+        olhoFechado.classList.remove('hidden');
+    }
+}
+
+function mostrar() {
+    let senha = document.querySelector(".senha-classe");
+
+    if (senha.getAttribute('type') == 'password') {
+        senha.setAttribute('type', 'text')
+        senha.setAttribute('placeholder', '')
+        olhoFechado.classList.add('hidden');
+        olhoAberto.classList.remove('hidden');
+    }
+}
