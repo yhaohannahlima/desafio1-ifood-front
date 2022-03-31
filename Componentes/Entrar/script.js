@@ -1,5 +1,6 @@
-import { alerta } from "../util.js";
+import { alerta, tokenExpirado } from "../util.js";
 import { defineUrlBase as urlBase } from "../util.js";
+import { parseJwt } from "../util.js";
 
 const login = document.querySelector('button');
 const urlLogin = `${urlBase()}/login`;
@@ -7,10 +8,14 @@ const urlLogin = `${urlBase()}/login`;
 const tokenInvalidoString = localStorage.getItem("token-invalido");
 const tokenInvalido = JSON.parse(tokenInvalidoString);
 
+const tokenExpiradoString = localStorage.getItem("token-expirado");
+const tokenExpiradoBoolean = JSON.parse(tokenExpiradoString);
+
 localStorage.removeItem("token");
 localStorage.removeItem("idEntregador");
 login.addEventListener(('click'), () => {
     logar();
+    // localStorage.removeItem("token-expirado");
 });
 
 async function logar() {
@@ -62,7 +67,9 @@ async function logar() {
                             resposta.json()
                                 .then((dadosResposta) => {
                                     if (tokenInvalido === true) {
+                                        console.log('to aqui')
                                         localStorage.removeItem("token-invalido");
+                                        // localStorage.removeItem("token-expirado");
                                         setToken(dadosResposta.token, '../ConfirmarCancelar/index.html');
                                     } else {
                                         setToken(dadosResposta.token, '../ListaPedidos/index.html');
@@ -85,12 +92,3 @@ function setToken(dadosResposta, caminho) {
     window.location.href = caminho;
 }
 
-// fonte : https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
-function parseJwt(token) {
-    let base64Url = token.split('.')[1];
-    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
-};

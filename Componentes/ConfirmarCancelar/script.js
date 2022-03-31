@@ -84,49 +84,63 @@ async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
         await fetch(`${urlBase()}/rastreamento`, {
             method: 'POST',
             headers: {
+                'Authorization': `${localStorage.getItem('token')}`,
                 'content-type': 'application/json'
             },
             body: JSON.stringify(dadosDoPedido)
         }).then((response) => {
-            if (response.status === 200) { // modificar para guardar os dados que não foram enviados
-                return;
-            } else {
-                alerta(".alert-warning", "Sua localização não está sendo enviada!!!"); // colocar mensagem da API
-                return;
+            switch (response.status) {
+                case 401:
+                    alerta(".alert-danger",
+                        "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
+                        true, false, true);
+                    break;
+
+                case 201:
+                    break;
+
+                default:
+                    return;
             }
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.message); // colocar mensagem da API
+        return alerta(".alert-danger", error.mensagem); // colocar mensagem da API
     }
 }
 
 async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
     try {
         const idPedido = pedidoObj.codigoPedido;
-        const idEntregador = {
-            idEntregador: pedidoObj.entregador.codigoEntregador
-        };
+        const idEntregador = parseInt(localStorage.getItem('idEntregador'));
 
         await fetch(`${urlBase()}${tipoDeFinalizacao}${idPedido}`, {
             method: 'PUT',
             headers: {
+                'Authorization': `${localStorage.getItem('token')}`,
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(idEntregador)
+            body: JSON.stringify({ idEntregador })
 
         }).then((response) => {
+            switch (response.status) {
+                case 401:
+                    alerta(".alert-danger",
+                        "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
+                        true, false, true);
+                    break;
 
-            if (response.status === 200) {
-                window.location.href = "../ListaPedidos/index.html";
-                localStorage.removeItem('Dados do pedido');
-            } else {
-                return alerta(".alert-warning", "Não foi possível finalizar o pedido!!!"); // colocar mensagem da API
+                case 200:
+                    window.location.href = "../ListaPedidos/index.html";
+                    break;
+
+                default:
+                    return;
             }
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.message); // colocar mensagem da API
+        return alerta(".alert-danger", error.mensagem); // colocar mensagem da API
     }
 }
 

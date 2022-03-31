@@ -13,8 +13,10 @@ export function alerta(tipoAlerta, mensagem, redirecionamento, fechar, parametro
 
             if (parametroTela) {
                 localStorage.setItem('token-invalido','true');
+                console.log('to aqui')
             }
 
+            console.log('to aqui dentro')
         }
     });
 
@@ -35,4 +37,26 @@ export function carregandoVisivel(carregando) {
 
 export function carregandoEscondido(carregando) {
     carregando.classList.add('hidden');
+}
+
+// fonte : https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
+export function parseJwt(token) {
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+};
+
+export function tokenExpirado(token) {
+    const tokenLocalStorage = parseJwt(token);
+    const validadeString = `${tokenLocalStorage.exp}000`;
+    const validade = parseInt(validadeString);
+    
+    const tempoAtual = Date.now();
+
+    if (tempoAtual > validade) {
+        localStorage.setItem('token-expirado', 'true');
+    } 
 }
