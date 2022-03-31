@@ -77,9 +77,9 @@ function logar() {
                                 .then((dadosResposta) => {
                                     if (tokenInvalido === true) {
                                         localStorage.removeItem("token-invalido");
-                                        setToken(dadosResposta.token, '../ConfirmarCancelar/index.html');
+                                        setToken(dadosResposta.token, '../confirmarcancelar/index.html');
                                     } else {
-                                        setToken(dadosResposta.token, '../ListaPedidos/index.html');
+                                        setToken(dadosResposta.token, '../listapedidos/index.html');
                                     }
                                 })
                         default:
