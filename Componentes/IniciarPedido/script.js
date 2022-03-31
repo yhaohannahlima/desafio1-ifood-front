@@ -1,5 +1,5 @@
-import { alerta, sairAplicacao } from "../componentes/util.js";
-import { defineUrlBase as urlBase } from "../componentes/util.js";
+import { alerta, sairAplicacao } from "../util.js";
+import { defineUrlBase as urlBase } from "../util.js";
 
 window.setInterval(() => {
     window.location.reload();
