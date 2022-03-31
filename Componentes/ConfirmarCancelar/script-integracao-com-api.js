@@ -1,4 +1,7 @@
 import { alerta } from "../util.js";
+import { defineUrlBase as urlBase } from "../util.js";
+import { carregandoVisivel } from "../util.js";
+import { carregandoEscondido } from "../util.js";
 
 const pedido = document.querySelector('div .pagina-pedidos');
 const nomeCliente = document.querySelector('div .cliente');
@@ -6,11 +9,12 @@ const nomeCliente = document.querySelector('div .cliente');
 const pedidoString = localStorage.getItem('Dados do pedido');
 const pedidoObj = JSON.parse(pedidoString);
 
-const urlBase = 'https://trackingifood.herokuapp.com';
-
 let idWatch;
 const pontoAtual = [];
-const intervalo = 10000;
+const intervalo = 2000;
+
+const carregando = document.querySelector('.carregar');
+carregandoVisivel(carregando);
 
 preencherInformacoesPedido();
 concluirPedido();
@@ -22,11 +26,10 @@ const intervalID = window.setInterval(() => {
     if (pontoAtual.length !== 0) {
         enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
     }
-
 }, intervalo);
 
 
-//---------- FUNÇÕES
+
 function preencherInformacoesPedido() {
     pedido.textContent = `Pedido #${pedidoObj.codigoPedido}`;
     nomeCliente.textContent = `Cliente: ${pedidoObj.cliente.nome}`;
@@ -72,51 +75,80 @@ async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
             idPedido: pedidoObj.codigoPedido
         }
 
-        await fetch(`${urlBase}/rastreamento`, { //authorization
+        await fetch(`${urlBase()}/rastreamento`, {
             method: 'POST',
             headers: {
+                'Authorization': `${localStorage.getItem('token')}`,
                 'content-type': 'application/json'
             },
             body: JSON.stringify(dadosDoPedido)
         }).then((response) => {
-            if (response.status === 201) { // modificar para guardar os dados que não foram enviados
-                return;
-            } else {
-                alerta(".alert-warning", "Sua localização não está sendo enviada!!!"); // colocar mensagem da API
-                return;
+            switch (response.status) {
+                case 401:
+                    alerta(".alert-danger",
+                        "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
+                        true, false, true);
+                    break;
+
+                case 201:
+                    carregandoEscondido(carregando);
+
+                    const imagemMoto = document.querySelector('.pedido-carregado');
+                    imagemMoto.classList.remove('hidden');
+
+                    const botoesConcluirCancelar = document.querySelector('.btn-concluir-cancela');
+                    botoesConcluirCancelar.classList.remove('hidden');
+
+                    break;
+
+                default:
+                    carregandoVisivel(carregando);
+
+                    imagemMoto.classList.add('hidden');
+                    botoesConcluirCancelar.classList.add('hidden');
+
+                    return;
             }
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.message); // colocar mensagem da API
+        return alerta(".alert-danger", "Erro ao conectar!");
     }
 }
 
 async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
     try {
         const idPedido = pedidoObj.codigoPedido;
-        const idEntregador = {
-            idEntregador: pedidoObj.entregador.codigoEntregador
-        };
+        const idEntregador = parseInt(localStorage.getItem('idEntregador'));
 
-        await fetch(`${urlBase}${tipoDeFinalizacao}${idPedido}`, {
+        await fetch(`${urlBase()}${tipoDeFinalizacao}${idPedido}`, {
             method: 'PUT',
             headers: {
+                'Authorization': `${localStorage.getItem('token')}`,
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(idEntregador)
+            body: JSON.stringify({ idEntregador })
 
         }).then((response) => {
-            if (response.status === 200) {
-                window.location.href = "../ListaPedidos/index.html";
-                localStorage.removeItem('Dados do pedido');
-            } else {
-                return alerta(".alert-warning", "Não foi possível finalizar o pedido!!!"); // colocar mensagem da API
+            switch (response.status) {
+                case 401:
+                    alerta(".alert-danger",
+                        "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
+                        true, false, true);
+                    break;
+
+                case 200:
+                    window.location.href = "../ListaPedidos/index.html";
+                    break;
+
+                default:
+                    alerta(".alert-warning", "Não foi possível enviar a sua localização!");
+                    return;
             }
         });
 
     } catch (error) {
-        return alerta(".alert-danger", error.message); // colocar mensagem da API
+        return alerta(".alert-danger", "Erro ao conectar!");
     }
 }
 
