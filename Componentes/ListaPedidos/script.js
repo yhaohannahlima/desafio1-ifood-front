@@ -1,4 +1,4 @@
-import { alerta } from "../util.js";
+import { alerta, sairAplicacao } from "../util.js";
 import { defineUrlBase as urlBase } from "../util.js";
 import { carregandoVisivel } from "../util.js";
 import { carregandoEscondido } from "../util.js";
@@ -9,6 +9,11 @@ window.setInterval(() => {
 
 
 const listaPedidos = document.querySelector('div .lista-pedidos');
+const logout = document.querySelector('.logout');
+
+logout.addEventListener('click', () => {
+    sairAplicacao();
+});
 
 acessarListaDePedidosDoBancoDeDados();
 
@@ -79,7 +84,7 @@ async function acessarListaDePedidosDoBancoDeDados() {
         });
 
     } catch (error) {
-        return alerta("Erro ao recuperar a lista de pedidos!");
+        return alerta("Erro ao conectar!");
     }
 };
 

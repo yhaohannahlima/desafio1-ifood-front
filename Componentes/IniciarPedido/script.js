@@ -1,9 +1,10 @@
-import { alerta } from "../util.js";
+import { alerta, sairAplicacao } from "../util.js";
 import { defineUrlBase as urlBase } from "../util.js";
 
 window.setInterval(() => {
     window.location.reload();
 }, 60000);
+
 
 const token = localStorage.getItem('token');
 const pedidoString = localStorage.getItem('Dados do pedido');
@@ -11,6 +12,7 @@ const pedidoObj = JSON.parse(pedidoString);
 const idPedido = pedidoObj.codigoPedido;
 const idEntregador = localStorage.getItem('idEntregador');
 const iniciarCorrida = document.querySelector('button');
+const logout = document.querySelector('.logout');
 
 const linkApi = `${urlBase()}/pedidos/aceitar/${idPedido}`;
 const pedidoNaTela = document.querySelector('div .card-pedido');
@@ -18,6 +20,9 @@ pedidoNaTela.textContent = `Pedido: #${pedidoObj.codigoPedido}`;
 const nomeCliente = document.querySelector('div .card-cliente');
 nomeCliente.textContent = `Cliente: ${pedidoObj.cliente.nome}`;
 
+logout.addEventListener('click', () => {
+    sairAplicacao();
+});
 
 iniciarCorrida.addEventListener(('click'), () => {
     enviosDeDados();
