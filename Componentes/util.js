@@ -47,5 +47,5 @@ export function parseJwt(token) {
 };
 
 export function sairAplicacao() {
-    window.location.href = `../../componentes/entrar/index.html`
+    window.location.href = `./index.html`
 }
