@@ -30,4 +30,6 @@ Frontend do projeto do desafio de back ofertado pelo o Ifood com com Gama Academ
 - Passagem de tela a tela.
 - Função de logout para a saída da aplicação.
 
+### Interface Web
+
 ## ⚙️ Informações Gerais
