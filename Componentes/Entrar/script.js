@@ -27,21 +27,26 @@ function logar() {
         email = emailTratado;
         senha = senha;
     } else {
+        mudancaEstado();
         alerta(".alert-danger", "Usuário e/ou senha incorretos!");
     }
 
     switch (senha || email) {
         case "":
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            mudancaEstado();
+            alerta(".alert-danger", "Usuário e/ou senha incorretos!");
             break;
         case " ":
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            mudancaEstado();
+            alerta(".alert-danger", "Usuário e/ou senha incorretos!");
             break;
         case null:
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            mudancaEstado();
+            alerta(".alert-danger", "Usuário e/ou senha incorretos!");
             break;
         case undefined:
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            mudancaEstado();
+            alerta(".alert-danger", "Usuário e/ou senha incorretos!");
             break;
         default:
             try {
@@ -87,6 +92,7 @@ function logar() {
                     }
                 })
             } catch (error) {
+                mudancaEstado();
                 alerta(`.alert-danger`, `Erro ao conectar! ${error.message}`);
             }
     }
@@ -108,6 +114,18 @@ function parseJwt(token) {
     }).join(''));
     return JSON.parse(jsonPayload);
 };
+
+function mudancaEstado() {
+    let email = document.querySelector(".email-classe").value;
+    let senha = document.querySelector(".senha-classe").value;
+    let label_input = document.querySelectorAll(".label_input")
+    setTimeout(() => {
+        label_input.setAttribute('style', 'color: red')
+        email.setAttribute('style', 'border-color: red')
+        senha.setAttribute('style', 'border-color: red')
+        usuario.focus()
+    }, 1000);
+}
 
 let olhoFechado = document.querySelector('.olhoFechado');
 let olhoAberto = document.querySelector('.olhoAberto');
