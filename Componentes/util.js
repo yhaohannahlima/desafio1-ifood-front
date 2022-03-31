@@ -13,10 +13,7 @@ export function alerta(tipoAlerta, mensagem, redirecionamento, fechar, parametro
 
             if (parametroTela) {
                 localStorage.setItem('token-invalido','true');
-                console.log('to aqui')
             }
-
-            console.log('to aqui dentro')
         }
     });
 

@@ -8,14 +8,14 @@ window.setInterval(() => {
     window.location.reload();
 }, 60000);
 
-window.setInterval(() => {
-    tokenExpirado(localStorage.getItem('token'));
-}, 10000);
+// window.setInterval(() => {
+//     tokenExpirado(localStorage.getItem('token'));
+// }, 10000);
 
-if (localStorage.getItem('token-expirado')) {
-    window.location.href = '../Entrar/index.html'; 
+// if (localStorage.getItem('token-expirado')) {
+//     window.location.href = '../Entrar/index.html'; 
 
-} else {
+// } else {
     const listaPedidos = document.querySelector('div .lista-pedidos');
 
     acessarListaDePedidosDoBancoDeDados();
@@ -90,4 +90,4 @@ if (localStorage.getItem('token-expirado')) {
             return alerta(".alert-danger", error.mensagem);
         }
     };
-}
+// }

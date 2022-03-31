@@ -6,14 +6,14 @@ window.setInterval(() => {
     window.location.reload();
 }, 60000);
 
-window.setInterval(() => {
-    tokenExpirado(localStorage.getItem('token'));
-}, 10000);
+// window.setInterval(() => {
+//     tokenExpirado(localStorage.getItem('token'));
+// }, 10000);
 
-if (localStorage.getItem('token-expirado')) {
-    window.location.href = '../Entrar/index.html'; 
+// if (localStorage.getItem('token-expirado')) {
+//     window.location.href = '../Entrar/index.html'; 
 
-} else {
+// } else {
     const token = localStorage.getItem('token');
     const pedidoString = localStorage.getItem('Dados do pedido');
     const pedidoObj = JSON.parse(pedidoString);
@@ -75,4 +75,4 @@ if (localStorage.getItem('token-expirado')) {
             return;
         }
     }
-}
+// }

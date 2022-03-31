@@ -8,13 +8,14 @@ window.setInterval(() => {
     window.location.reload();
 }, 60000);
 
-window.setInterval(() => {
-    tokenExpirado(localStorage.getItem('token'));
-}, 10000);
+// window.setInterval(() => {
+//     tokenExpirado(localStorage.getItem('token'));
+// }, 10000);
 
-if (localStorage.getItem('token-expirado')) {
-    window.location.href = '../Entrar/index.html'; 
-} else {
+// if (localStorage.getItem('token-expirado')) {
+//     localStorage.setItem('pagina-confirmar', 'true');
+//     window.location.href = '../Entrar/index.html';
+// } else {
     const pedido = document.querySelector('div .pagina-pedidos');
     const nomeCliente = document.querySelector('div .cliente');
 
@@ -186,4 +187,4 @@ if (localStorage.getItem('token-expirado')) {
             return;
         });
     }
-}
+// }

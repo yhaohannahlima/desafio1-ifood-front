@@ -8,8 +8,8 @@ const urlLogin = `${urlBase()}/login`;
 const tokenInvalidoString = localStorage.getItem("token-invalido");
 const tokenInvalido = JSON.parse(tokenInvalidoString);
 
-const tokenExpiradoString = localStorage.getItem("token-expirado");
-const tokenExpiradoBoolean = JSON.parse(tokenExpiradoString);
+// const paginaConfirmarString = localStorage.getItem("pagina-confirmar");
+// const paginaConfirmarBoolean = JSON.parse(paginaConfirmarString);
 
 localStorage.removeItem("token");
 localStorage.removeItem("idEntregador");
@@ -67,9 +67,8 @@ async function logar() {
                             resposta.json()
                                 .then((dadosResposta) => {
                                     if (tokenInvalido === true) {
-                                        console.log('to aqui')
                                         localStorage.removeItem("token-invalido");
-                                        // localStorage.removeItem("token-expirado");
+                                        // localStorage.removeItem("pagina-confirmar");
                                         setToken(dadosResposta.token, '../ConfirmarCancelar/index.html');
                                     } else {
                                         setToken(dadosResposta.token, '../ListaPedidos/index.html');
