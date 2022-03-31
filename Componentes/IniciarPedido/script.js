@@ -1,6 +1,6 @@
 import { alerta, sairAplicacao } from "../util.js";
 
-const urlBase = 'http://localhost:8080';
+const urlBase = 'https://trackingifood.herokuapp.com';
 const token = localStorage.getItem('token');
 const pedidoString = localStorage.getItem('Dados do pedido');
 const pedidoObj = JSON.parse(pedidoString);

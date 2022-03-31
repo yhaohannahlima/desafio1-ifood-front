@@ -6,7 +6,7 @@ const nomeCliente = document.querySelector('div .cliente');
 const pedidoString = localStorage.getItem('Dados do pedido');
 const pedidoObj = JSON.parse(pedidoString);
 
-const urlBase = 'http://localhost:8080'; //colocar no util.js
+const urlBase = 'https://trackingifood.herokuapp.com';
 
 let idWatch;
 const pontoAtual = [];
@@ -16,10 +16,10 @@ preencherInformacoesPedido();
 concluirPedido();
 cancelarPedido();
 
-const intervalID = window.setInterval(() => { 
+const intervalID = window.setInterval(() => {
     getLocation();
 
-    if(pontoAtual.length !== 0) {
+    if (pontoAtual.length !== 0) {
         enviarPontoDeGeolocalizacaoParaApiContinuamente(pontoAtual);
     }
 
@@ -51,15 +51,14 @@ function posicaoError(erro) {
 function getLocation() {
     idWatch = navigator.geolocation.watchPosition(
         (position) => marcarPontoDeGeolocalizacao(position),
-        (erro) => posicaoError(erro),
-        { enableHighAccuracy: true }
+        (erro) => posicaoError(erro), { enableHighAccuracy: true }
     );
 }
 
 async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
-    const latitude = ponto[0].latitude; 
-    const longitude = ponto[0].longitude; 
-    const tempo = ponto[0].tempo; 
+    const latitude = ponto[0].latitude;
+    const longitude = ponto[0].longitude;
+    const tempo = ponto[0].tempo;
 
     if (!pedidoObj.codigoPedido || !latitude || !longitude || !tempo) {
         return;

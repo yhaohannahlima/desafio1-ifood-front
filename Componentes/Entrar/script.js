@@ -1,7 +1,7 @@
 import { alerta } from "../util.js";
 
 const login = document.querySelector('button');
-const urlBase = 'http://localhost:8080';
+const urlBase = 'https://trackingifood.herokuapp.com';
 const urlLogin = `${urlBase}/login`;
 
 const tokenExpiradoString = localStorage.getItem("token expirado");

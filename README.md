@@ -24,4 +24,4 @@ Frontend do projeto do desafio de back ofertado pelo o Ifood com com Gama Academ
 - Logar entregador com autorização e armazenamento de token e id
 - Verificar se há login expirado no banco de dados ao se comunicar e, si houver, dar continuidade ao pedido com exibição na tela.
 - Apresentar uma lista de pedidos em aberto para as entregas ser realizadas pelo o entregador.
-- Seleção da entrega através da entrega disponivel
+- Seleção da entrega através da lista 

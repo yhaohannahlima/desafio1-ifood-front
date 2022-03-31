@@ -2,7 +2,7 @@ import { alerta } from "../util.js";
 
 const listaPedidos = document.querySelector('div .lista-pedidos');
 
-const linkApi = 'http://localhost:8080/pedidos/abertos';
+const linkApi = 'https://trackingifood.herokuapp.com/pedidos/abertos';
 
 acessarListaDePedidosDoBancoDeDados(linkApi);
 
