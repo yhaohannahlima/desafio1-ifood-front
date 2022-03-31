@@ -29,3 +29,5 @@ Frontend do projeto do desafio de back ofertado pelo o Ifood com com Gama Academ
 - Função de confirmar corrida e cancelar corrida.
 - Passagem de tela a tela.
 - Função de logout para a saída da aplicação.
+
+## ⚙️ Informações Gerais
