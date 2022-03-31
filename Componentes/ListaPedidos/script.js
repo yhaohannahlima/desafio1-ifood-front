@@ -1,58 +1,90 @@
-import { alerta } from "../util.js";
+import { alerta, sairAplicacao } from "../util.js";
+import { defineUrlBase as urlBase } from "../util.js";
+import { carregandoVisivel } from "../util.js";
+import { carregandoEscondido } from "../util.js";
+
+window.setInterval(() => {
+    window.location.reload();
+}, 60000);
+
 
 const listaPedidos = document.querySelector('div .lista-pedidos');
+const logout = document.querySelector('.logout');
 
-const linkApi = 'http://localhost:8080/pedidos/abertos';
+logout.addEventListener('click', () => {
+    sairAplicacao();
+});
 
-acessarListaDePedidosDoBancoDeDados(linkApi);
+acessarListaDePedidosDoBancoDeDados();
 
-async function acessarListaDePedidosDoBancoDeDados(linkApi) {
+async function acessarListaDePedidosDoBancoDeDados() {
     localStorage.removeItem('Dados do pedido');
 
-    await fetch(linkApi).then(function(response) {
-        if (!response.ok) {
-            alerta(".alert-danger", "Não foi possível acessar a lista de pedidos!!!"); // colocar mensagem da API
+    const carregando = document.querySelector('.carregar');
+    carregandoVisivel(carregando);
 
-            return;
-        }
+    try {
+        await fetch(`${urlBase()}/pedidos/abertos`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `${localStorage.getItem('token')}`,
+                'content-type': 'application/json'
+            }
 
-        try {
-            const promiseBody = response.json();
+        }).then(function (response) {
+            switch (response.status) {
+                case 401:
+                    carregandoEscondido(carregando);
+                    alerta(".alert-danger",
+                        "Você não tem autorização para acessar esse recurso! CLIQUE AQUI.",
+                        true);
+                    break;
 
-            promiseBody.then((promessaCorpo) => {
-                const body = promessaCorpo.sort((a, b) => a.codigoPedido - b.codigoPedido);
+                case 200:
+                    const promiseBody = response.json();
+                    promiseBody.then((promessaCorpo) => {
+                        if (promessaCorpo.length === 0) {
+                            carregandoEscondido(carregando);
 
-                body.forEach((item, indice) => {
-                    if (item.statusPedido != "aberto") {
-                        return;
-                    }
+                            const pedidosEntregues = document.querySelector(".pedidos-entregues");
+                            pedidosEntregues.classList.remove("hidden");
+                            return;
+                        }
 
-                    const novoPedido = document.createElement('button');
-                    novoPedido.classList.add("btn");
-                    novoPedido.classList.add("btn-pedido");
 
-                    listaPedidos.append(novoPedido);
+                        const body = promessaCorpo.sort((a, b) => a.codigoPedido - b.codigoPedido);
 
-                    const pedido = document.querySelectorAll('.btn-pedido');
-                    pedido[indice].textContent = `Código do pedido: ${item.codigoPedido}`;
+                        body.forEach((item, indice) => {
+                            const novoPedido = document.createElement('button');
+                            novoPedido.classList.add("btn");
+                            novoPedido.classList.add("btn-pedido");
 
-                    pedido[indice].addEventListener('click', () => {
-                        window.location.href = '../IniciarPedido/index.html'; // mudar para IniciarPedido
-                        localStorage.setItem('Dados do pedido', JSON.stringify(body[indice]));
+                            listaPedidos.append(novoPedido);
+
+                            const pedido = document.querySelectorAll('.btn-pedido');
+                            pedido[indice].textContent = `Código do pedido: ${item.codigoPedido}`;
+
+                            pedido[indice].addEventListener('click', () => {
+                                window.location.href = '../Iniciarpedido/index.html';
+                                localStorage.setItem('Dados do pedido', JSON.stringify(body[indice]));
+                            });
+
+                            if (indice === (body.length - 1)) {
+                                carregandoEscondido(carregando);
+                                return;
+                            }
+                        });
                     });
+                    break;
 
-                    if (indice === (body.length - 1)) {
-                        const carregando = document.querySelector('.spinner-border');
-                        const carregandoTexto = document.querySelector('.carregando-texto');
+                default:
+                    carregandoVisivel(carregando);
+                    return;
+            }
+        });
 
-                        carregando.style.display = 'none';
-                        carregandoTexto.style.display = 'none';
-                        return;
-                    }
-                });
-            });
-        } catch (error) {
-            return alerta(".alert-danger", error.message); // colocar mensagem da API
-        }
-    });
+    } catch (error) {
+        return alerta("Erro ao conectar!");
+    }
 };
+

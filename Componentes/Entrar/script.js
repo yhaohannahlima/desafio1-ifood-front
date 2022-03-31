@@ -1,11 +1,12 @@
 import { alerta } from "../util.js";
+import { defineUrlBase as urlBase } from "../util.js";
+import { parseJwt } from "../util.js";
 
 const login = document.querySelector('button');
-const urlBase = 'http://localhost:8080';
-const urlLogin = `${urlBase}/login`;
+const urlLogin = `${urlBase()}/login`;
 
-const tokenExpiradoString = localStorage.getItem("token expirado");
-const tokenExpirado = JSON.parse(tokenExpiradoString);
+const tokenInvalidoString = localStorage.getItem("token-invalido");
+const tokenInvalido = JSON.parse(tokenInvalidoString);
 
 localStorage.removeItem("token");
 localStorage.removeItem("idEntregador");
@@ -15,7 +16,6 @@ window.onload = () => {
         logar();
     });
 }
-
 
 function logar() {
 
@@ -32,16 +32,16 @@ function logar() {
 
     switch (senha || email) {
         case "":
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            alerta(".alert-danger", "Problema com credenciais do usuário!");
             break;
         case " ":
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            alerta(".alert-danger", "Problema com credenciais do usuário!");
             break;
         case null:
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            alerta(".alert-danger", "Problema com credenciais do usuário!");
             break;
         case undefined:
-            alerta(".alert-warning", "Usuário e/ou senha incorretos!");
+            alerta(".alert-danger", "Problema com credenciais do usuário!");
             break;
         default:
             try {
@@ -58,25 +58,25 @@ function logar() {
                 }).then((resposta) => {
                     switch (resposta.status) {
                         case 404:
-                            alerta(".alert-warning", resposta.error.message);
+                            alerta(".alert-danger", "Erro ao tentar entrar! Verifique suas credenciais.");
                             break;
                         case 409:
-                            alerta(".alert-warning", resposta.error.message);
+                            alerta(".alert-danger", "Erro ao tentar entrar! Verifique suas credenciais.");
                             break;
                         case 400:
-                            alerta(".alert-warning", resposta.error.message);
+                            alerta(".alert-danger", "Erro ao tentar entrar! Verifique suas credenciais.");
                             break;
                         case 401:
-                            alerta(".alert-warning", `Não autorizado. ${resposta.error.message}`);
+                            alerta(".alert-danger", "Erro ao tentar entrar! Verifique suas credenciais.");
                             break;
                         case 405:
-                            alerta(".alert-warning", resposta.error.message);
+                            alerta(".alert-danger", "Erro ao tentar entrar! Verifique suas credenciais.");
                             break;
                         case 200:
                             resposta.json()
                                 .then((dadosResposta) => {
-                                    if (tokenExpirado === true) {
-                                        localStorage.removeItem("token expirado");
+                                    if (tokenInvalido === true) {
+                                        localStorage.removeItem("token-invalido");
                                         setToken(dadosResposta.token, '../ConfirmarCancelar/index.html');
                                     } else {
                                         setToken(dadosResposta.token, '../ListaPedidos/index.html');
@@ -87,7 +87,7 @@ function logar() {
                     }
                 })
             } catch (error) {
-                alerta(`.alert-danger`, `Erro ao conectar! ${error.message}`);
+                alerta('.alert-danger', 'Erro ao conectar! Por favor, tente novamente mais tarde.');
             }
     }
 };
@@ -98,16 +98,6 @@ function setToken(dadosResposta, caminho) {
     localStorage.setItem("idEntregador", idEntregador.sub);
     window.location.href = caminho;
 }
-
-// fonte : https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
-function parseJwt(token) {
-    let base64Url = token.split('.')[1];
-    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
-};
 
 let olhoFechado = document.querySelector('.olhoFechado');
 let olhoAberto = document.querySelector('.olhoAberto');
