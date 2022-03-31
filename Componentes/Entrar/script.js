@@ -27,25 +27,20 @@ function logar() {
         email = emailTratado;
         senha = senha;
     } else {
-        mudancaEstado();
         alerta(".alert-danger", "Usuário e/ou senha incorretos!");
     }
 
     switch (senha || email) {
         case "":
-            mudancaEstado();
             alerta(".alert-danger", "Usuário e/ou senha incorretos!");
             break;
         case " ":
-            mudancaEstado();
             alerta(".alert-danger", "Usuário e/ou senha incorretos!");
             break;
         case null:
-            mudancaEstado();
             alerta(".alert-danger", "Usuário e/ou senha incorretos!");
             break;
         case undefined:
-            mudancaEstado();
             alerta(".alert-danger", "Usuário e/ou senha incorretos!");
             break;
         default:
@@ -115,45 +110,40 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 };
 
-function mudancaEstado() {
-    let email = document.querySelector(".email-classe").value;
-    let senha = document.querySelector(".senha-classe").value;
-    let label_input = document.querySelectorAll(".label_input")
-    setTimeout(() => {
-        label_input.setAttribute('style', 'color: red')
-        email.setAttribute('style', 'border-color: red')
-        senha.setAttribute('style', 'border-color: red')
-        usuario.focus()
-    }, 1000);
-}
 
 let olhoFechado = document.querySelector('.olhoFechado');
 let olhoAberto = document.querySelector('.olhoAberto');
 olhoFechado.addEventListener(('click'), () => {
-    mostrar();
+    exibirEsconderSenha();
 });
 
 olhoAberto.addEventListener(('click'), () => {
-    fechar();
+    exibirEsconderSenha();
 })
 
-function fechar() {
+function exibirEsconderSenha() {
     let senha = document.querySelector(".senha-classe");
     if (senha.getAttribute('type') == 'text') {
         senha.setAttribute('type', 'password');
         senha.setAttribute('placeholder', '**************')
         olhoAberto.classList.add('hidden');
         olhoFechado.classList.remove('hidden');
-    }
-}
-
-function mostrar() {
-    let senha = document.querySelector(".senha-classe");
-
-    if (senha.getAttribute('type') == 'password') {
+    } else {
         senha.setAttribute('type', 'text')
         senha.setAttribute('placeholder', '')
         olhoFechado.classList.add('hidden');
         olhoAberto.classList.remove('hidden');
     }
 }
+// function mudancaEstado() {
+//     console.log("deu certo")
+//     let input = document.querySelectorAll("input");
+//     let label = document.querySelectorAll("label")
+//     input.classList.toggle("sinalizacaoInput");
+//     label.classList.toggle("sinalizacaoLabel");
+//     setTimeout(() => {
+//         input.classList.toggle("sinalizacaoInput");
+//         label.classList.toggle("sinalizacaoLabel");
+//         labe.focus()
+//     }, 1000);
+// }
