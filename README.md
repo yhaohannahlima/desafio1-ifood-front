@@ -4,13 +4,18 @@
      Desafio-iFood-Front - Equipe Traceback (6)
 </h1>
 
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=FINALIZADO&color=GREEN&style=for-the-badge)
 
 Tópicos
 =================
 <!--ts-->
    * [Sobre o projeto](#-sobre-o-projeto)
    * [Informações Gerais](#-informações-gerais)
+   * [API endpoints](#-API-endpoints)
+      * [Login](#login)
+      * [Pedido](#Pedido)
+      * [Entregador](#Entregador)
+      * [Rastreamento](#Rastreamento )
    * [Pré-requisitos](#pré-requisitos)
    * [Editar a aplicação ou rodar localmente](#-editar-a-aplicação-ou-rodar-localmente)
    * [Tecnologias](#-tecnologias)
