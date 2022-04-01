@@ -25,7 +25,7 @@ export function alerta(tipoAlerta, mensagem, redirecionamento, fechar, parametro
 }
 
 export function defineUrlBase() {
-    return 'https://trackingifood.herokuapp.com';
+    return 'http://localhost:8080';
 }
 
 export function carregandoVisivel(carregando) {
