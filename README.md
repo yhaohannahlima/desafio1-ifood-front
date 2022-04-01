@@ -30,8 +30,8 @@ link para o repositório de Back: https://github.com/Pam18/desafio1-ifood-back.g
 ### :calling: Interface Web
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-  <img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile.png" width="40px">
-  <img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(1).png" width="40px">
+  <img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile.png" width="400px">
+  <img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(1).png" width="400px">
 </p>
 ## ⚙️ Informações Gerais
 
