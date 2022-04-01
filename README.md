@@ -30,14 +30,14 @@ link para o repositório de Back: https://github.com/Pam18/desafio1-ifood-back.g
 ### :calling: Interface Web
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile.png" width="200px">
-<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(1).png" width="200px">
-<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(2).png" width="200px">
-<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(3).png" width="200px">
-<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(4).png" width="200px">
-<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(5).png" width="200px">
-<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(6).png" width="200px">
-<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(7).png" width="200px">
+<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile.png" width="100px">
+<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(1).png" width="100px">
+<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(2).png" width="100px">
+<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(3).png" width="100px">
+<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(4).png" width="100px">
+<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(5).png" width="100px">
+<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(6).png" width="100px">
+<img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(7).png" width="100px">
 </p>
 ## ⚙️ Informações Gerais
 
