@@ -44,10 +44,6 @@ O que foi implementado durante o projeto:
 8) Passagem de tela a tela.
 9) Função de logout para a saída da aplicação.
 
-Ainda falta implementar:
-1) Tela 
-2) Y;
-3) Z.
 ## Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
