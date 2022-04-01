@@ -116,13 +116,7 @@ function fechar() {
         senha.setAttribute('placeholder', '**************')
         olhoAberto.classList.add('hidden');
         olhoFechado.classList.remove('hidden');
-    }
-}
-
-function mostrar() {
-    let senha = document.querySelector(".senha-classe");
-
-    if (senha.getAttribute('type') == 'password') {
+    } else if (senha.getAttribute('type') == 'password') {
         senha.setAttribute('type', 'text')
         senha.setAttribute('placeholder', '')
         olhoFechado.classList.add('hidden');

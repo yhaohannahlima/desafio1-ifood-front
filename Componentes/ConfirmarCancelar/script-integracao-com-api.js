@@ -54,8 +54,7 @@ function posicaoError(erro) {
 function getLocation() {
     idWatch = navigator.geolocation.watchPosition(
         (position) => marcarPontoDeGeolocalizacao(position),
-        (erro) => posicaoError(erro),
-        { enableHighAccuracy: true }
+        (erro) => posicaoError(erro), { enableHighAccuracy: true }
     );
 }
 

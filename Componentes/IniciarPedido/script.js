@@ -5,7 +5,6 @@ window.setInterval(() => {
     window.location.reload();
 }, 60000);
 
-
 const token = localStorage.getItem('token');
 const pedidoString = localStorage.getItem('Dados do pedido');
 const pedidoObj = JSON.parse(pedidoString);

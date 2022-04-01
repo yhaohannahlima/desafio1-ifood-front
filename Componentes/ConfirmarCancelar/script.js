@@ -28,13 +28,13 @@ const pontoAtual = [];
 const pontoFinalFake = listaDePontosFake[listaDePontosFake.length - 1];
 
 const intervalo = 3000;
-let i = 0; 
+let i = 0;
 
 const intervalID = window.setInterval(() => {
     if (pontoAtual.length === 1) {
         pontoAtual.pop();
-        pontoAtual.push(listaDePontosFake[i]); 
-        marcarPontoDeGeolocalizacaoDaListaFake(pontoAtual); 
+        pontoAtual.push(listaDePontosFake[i]);
+        marcarPontoDeGeolocalizacaoDaListaFake(pontoAtual);
         i++;
     }
 }, intervalo);
@@ -51,20 +51,20 @@ function preencherInformacoesPedido() {
 }
 
 function marcarPontoDeGeolocalizacaoDaListaFake(ponto) {
-    ponto[0].tempo = Date.now(); 
+    ponto[0].tempo = Date.now();
 
     if (ponto[0].latitude === pontoFinalFake.latitude && ponto[0].longitude === pontoFinalFake.longitude) {
         enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto);
-        clearInterval(intervalID); 
+        clearInterval(intervalID);
         return;
     }
     enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto);
 }
 
 async function enviarPontoDeGeolocalizacaoParaApiContinuamente(ponto) {
-    const latitude = ponto[0].latitude; 
-    const longitude = ponto[0].longitude; 
-    const tempo = ponto[0].tempo; 
+    const latitude = ponto[0].latitude;
+    const longitude = ponto[0].longitude;
+    const tempo = ponto[0].tempo;
 
     if (!pedidoObj.codigoPedido || !latitude || !longitude || !tempo) {
         return;
@@ -139,7 +139,7 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
         });
 
     } catch (error) {
-        return alerta(".alert-danger", 'Erro ao conectar!'); 
+        return alerta(".alert-danger", 'Erro ao conectar!');
     }
 }
 

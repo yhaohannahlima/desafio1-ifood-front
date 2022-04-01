@@ -11,10 +11,6 @@ window.setInterval(() => {
 const listaPedidos = document.querySelector('div .lista-pedidos');
 const logout = document.querySelector('.logout');
 
-logout.addEventListener('click', () => {
-    sairAplicacao();
-});
-
 acessarListaDePedidosDoBancoDeDados();
 
 async function acessarListaDePedidosDoBancoDeDados() {
@@ -31,7 +27,7 @@ async function acessarListaDePedidosDoBancoDeDados() {
                 'content-type': 'application/json'
             }
 
-        }).then(function (response) {
+        }).then(function(response) {
             switch (response.status) {
                 case 401:
                     carregandoEscondido(carregando);
@@ -87,4 +83,3 @@ async function acessarListaDePedidosDoBancoDeDados() {
         return alerta("Erro ao conectar!");
     }
 };
-
