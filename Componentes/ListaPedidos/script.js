@@ -61,7 +61,7 @@ async function acessarListaDePedidosDoBancoDeDados() {
                             pedido[indice].textContent = `Código do pedido: ${item.codigoPedido}`;
 
                             pedido[indice].addEventListener('click', () => {
-                                window.location.href = '../Iniciarpedido/index.html';
+                                window.location.href = '../../componentes/iniciarpedido/index.html';
                                 localStorage.setItem('Dados do pedido', JSON.stringify(body[indice]));
                             });
 
