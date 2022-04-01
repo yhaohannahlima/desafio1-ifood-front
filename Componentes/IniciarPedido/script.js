@@ -63,7 +63,7 @@ function enviosDeDados() {
                     alerta(".alert-warning", "Deu ruim! Tente novamente.");
                     break;
                 default:
-                    window.location.href = '../ConfirmarCancelar/index.html';
+                    window.location.href = '../../componentes/confirmarcancelar/index.html';
                     return;
             }
         });

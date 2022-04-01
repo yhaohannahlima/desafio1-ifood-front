@@ -138,7 +138,7 @@ async function enviarUltimoDadoAoConcluir(tipoDeFinalizacao) {
                     break;
 
                 case 200:
-                    window.location.href = "../ListaPedidos/index.html";
+                    window.location.href = "../../componentes/listapedidos/index.html";
                     break;
 
                 default:

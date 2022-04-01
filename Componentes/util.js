@@ -9,7 +9,7 @@ export function alerta(tipoAlerta, mensagem, redirecionamento, fechar, parametro
         alerta.classList.add('hidden');
 
         if (redirecionamento) {
-            window.location.href = "../Entrar/index.html";
+            window.location.href = "../../componentes/entrar/index.html";
 
             if (parametroTela) {
                 localStorage.setItem('token-invalido', 'true');
@@ -47,5 +47,5 @@ export function parseJwt(token) {
 };
 
 export function sairAplicacao() {
-    window.location.href = `/Componentes/Entrar/index.html`
+    window.location.href = `../../index.html`
 }
