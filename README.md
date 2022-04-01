@@ -51,7 +51,7 @@ Ainda falta implementar:
 ## Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Vscode]:(https://code.visualstudio.com).
+[Git], [Vscode].
 
 ## :octocat:  Editar a aplicação ou rodar localmente
 
@@ -93,3 +93,4 @@ As seguintes linguagens/tecnologias foram usadas na construção do projeto:
 [Vscode]: https://code.visualstudio.com/
 [bootstrap]: https://www.notion.so/9ac83364a717462d8cca8711970507ac?v=2e3b3fa0208a4880a77c291e995f2f73/
 [javascript]: https://www.ecma-international.org/
+[Git]:https://git-scm.com/
