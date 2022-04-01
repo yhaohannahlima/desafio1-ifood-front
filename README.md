@@ -19,10 +19,13 @@ Tópicos
 
 ## 💻 Sobre o projeto
 
-Frontend do projeto do desafio de back ofertado pelo o Ifood com com Gama Academy do programa Ilab toda parte visual para realização das seguintes tarefas:
+Em resumo, o processo se dará através:
 
-
-
+entregador se conecta no sistema (estilo web app), e faz seu login;
+verifica em uma lista os pedidos em "aberto" e escolhe um destes para fazer a entrega;
+após a confirmação de aceite do pedido, o entregador passa a ser monitorado através da telemetria (latitude e longitude) até completar a entrega.
+quando finalizar a "entrega" o entregador avisa via sistema que fará o fechamento do pedido. Há também a possibilidade de cancelar o pedido.
+link para o repositório de Front: https://github.com/Pam18/desafio1-ifood-back.git
 ### Interface Web
 
 ## ⚙️ Informações Gerais
@@ -85,7 +88,7 @@ As seguintes linguagens/tecnologias foram usadas na construção do projeto:
 ⚙️**Guilherme Campos** - [GitHub](https://github.com/GuilhermeFelipeCampos) [Linkedin](https://www.linkedin.com/in/guilhermefelipecampos/)
 
 ---
-[trello]: https://trello.com/
+[trello]: https://trello.com/b/vpS2rAnJ/desafio/
 [notion]: https://www.notion.so/
 [Vscode]: https://code.visualstudio.com/
-[bootstrap]:https://getbootstrap.com/
+[bootstrap]: https://www.notion.so/9ac83364a717462d8cca8711970507ac?v=2e3b3fa0208a4880a77c291e995f2f73/
