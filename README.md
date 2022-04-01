@@ -11,11 +11,6 @@ Tópicos
 <!--ts-->
    * [Sobre o projeto](#-sobre-o-projeto)
    * [Informações Gerais](#-informações-gerais)
-   * [API endpoints](#-API-endpoints)
-      * [Login](#login)
-      * [Pedido](#Pedido)
-      * [Entregador](#Entregador)
-      * [Rastreamento](#Rastreamento )
    * [Pré-requisitos](#pré-requisitos)
    * [Editar a aplicação ou rodar localmente](#-editar-a-aplicação-ou-rodar-localmente)
    * [Tecnologias](#-tecnologias)
