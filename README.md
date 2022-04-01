@@ -92,3 +92,4 @@ As seguintes linguagens/tecnologias foram usadas na construção do projeto:
 [notion]: https://www.notion.so/
 [Vscode]: https://code.visualstudio.com/
 [bootstrap]: https://www.notion.so/9ac83364a717462d8cca8711970507ac?v=2e3b3fa0208a4880a77c291e995f2f73/
+[javascript]:https://www.ecma-international.org/
