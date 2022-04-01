@@ -1,7 +1,7 @@
 ![Logo](https://imagensfree.com.br/wp-content/uploads/2021/11/entregador-ifood-png-bicicleta-300x276.png)
 
 <h1 align="center">
-     Desafio-iFood-Front - Equipe Traceback (6)
+     Desafio-iFood-Back - Equipe Traceback (6)
 </h1>
 
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=FINALIZADO&color=GREEN&style=for-the-badge)
