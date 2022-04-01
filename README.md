@@ -28,7 +28,10 @@ após a confirmação de aceite do pedido, o entregador passa a ser monitorado a
 quando finalizar a "entrega" o entregador avisa via sistema que fará o fechamento do pedido. Há também a possibilidade de cancelar o pedido.
 link para o repositório de Back: https://github.com/Pam18/desafio1-ifood-back.git
 ### :calling: Interface Web
-
+<p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
+  <img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile.png" width="40px">
+  <img alt="smathphone" title="#smathphone" src="https://raw.githubusercontent.com/jeandsontb/project-banc-inter/main/frontend-app/screen/interfront.png" width="40px">
+</p>
 ## ⚙️ Informações Gerais
 
 
