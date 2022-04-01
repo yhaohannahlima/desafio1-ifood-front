@@ -42,7 +42,7 @@ O que foi implementado durante o projeto:
 9) Função de logout para a saída da aplicação.
 
 Ainda falta implementar:
-1) X;
+1) Tela 
 2) Y;
 3) Z.
 ## Pré-requisitos
@@ -66,6 +66,7 @@ $ git clone https://github.com/Pam18/desafio1-ifood-front.git
 As seguintes linguagens/tecnologias foram usadas na construção do projeto:
 - [JavaScript][javaScript]
 ## 🛠 Tecnologias
+- [Bootstrap][bootstrap]
 - [Vscode][vscode]
 - [Trello][trello]
 - [Notion][notion]
@@ -84,6 +85,7 @@ As seguintes linguagens/tecnologias foram usadas na construção do projeto:
 ⚙️**Guilherme Campos** - [GitHub](https://github.com/GuilhermeFelipeCampos) [Linkedin](https://www.linkedin.com/in/guilhermefelipecampos/)
 
 ---
-[trello]: https://link-trello.org/
-[notion]: https://notion-link.com/
+[trello]: https://trello.com/
+[notion]: https://www.notion.so/
 [Vscode]: https://code.visualstudio.com/
+[bootstrap]:https://getbootstrap.com/
