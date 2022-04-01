@@ -39,6 +39,7 @@ link para o repositório de Back: https://github.com/Pam18/desafio1-ifood-back.g
 <img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(6).png" width="100px">
 <img alt="smathphone" title="#smathphone" src="https://github.com/Pam18/desafio1-ifood-front/blob/readme_2/Componentes/assets/mobile%20(7).png" width="100px">
 </p>
+
 ## ⚙️ Informações Gerais
 
 
