@@ -11,7 +11,7 @@ Tópicos
 <!--ts-->
    * [Sobre o projeto](#-sobre-o-projeto)
    * [Informações Gerais](#-informações-gerais)
-   * [Pré-requisitos](#pré-requisitos)
+   * [Pré-requisitos](#-pré-requisitos)
    * [Editar a aplicação ou rodar localmente](#-editar-a-aplicação-ou-rodar-localmente)
    * [Tecnologias](#-tecnologias)
    * [Time de desenvolvimento](#-time-de-desenvolvimento)
@@ -69,6 +69,7 @@ As seguintes linguagens/tecnologias foram usadas na construção do projeto:
 - [Vscode][vscode]
 - [Trello][trello]
 - [Notion][notion]
+- [Git][git]
 ---
 
 ## 🦸 Time de desenvolvimento
